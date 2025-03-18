@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "../styles/globals.css";
 
-// Importation correcte des polices
-const geistSans = Geist({ subsets: ["latin"], display: "swap" });
-const geistMono = Geist_Mono({ subsets: ["latin"], display: "swap" });
+// Correctly import the font with required weight
+const poppins = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "teamify.com",
@@ -19,7 +18,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.className} ${geistMono.className} h-full bg-background text-foreground`}
+      className={`${poppins.className} h-full bg-background text-foreground`}
     >
       <body>{children}</body>
     </html>
