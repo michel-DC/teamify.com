@@ -6,10 +6,10 @@ import { HomePage } from "@/pages/homePage";
 export default function Home() {
   return (
     <>
-      <Login />
-      {/* <Register />
+      {/* <Login />
+      <Register />
       <Forgot /> */}
-      {/* <HomePage /> */}
+      <HomePage />
     </>
   );
 }
