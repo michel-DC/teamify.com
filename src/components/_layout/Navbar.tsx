@@ -3,29 +3,34 @@ import Link from "next/link";
 
 export const Navbar = () => {
   return (
-    <nav className="p-4 w-full bg-gray-800">
+    <nav className="sticky top-0 z-10 p-4 w-full bg-transparent backdrop-blur-xl">
       <div className="container flex justify-between items-center mx-auto">
-        <div className="text-lg font-bold text-white">
-          <Link href="/">Teamify</Link>
+        <div className="w-auto h-12">
+          <img
+            src="images/logo/noir-rb.png"
+            alt="Teamify Logo"
+            className="object-contain w-full h-full"
+          />
         </div>
         <div className="space-x-4">
-          <Link href="/about" className="text-gray-300 hover:text-white">
-            About Us
+          <Link href="" className="text-gray-300 hover:text-white">
+            À Propos
           </Link>
-          <Link href="/pricing" className="text-gray-300 hover:text-white">
-            Pricing
+          <span className="text-gray-300">|</span>
+          <Link href="" className="text-gray-300 hover:text-white">
+            Services
           </Link>
-          <Link href="/login" className="text-gray-300 hover:text-white">
-            Login
+          <span className="text-gray-300">|</span>
+          <Link href="" className="text-gray-300 hover:text-white">
+            Blog
           </Link>
-          <Link href="/register" className="text-gray-300 hover:text-white">
-            Register
+          <span className="text-gray-300">|</span>
+          <Link href="" className="text-gray-300 hover:text-white">
+            FAQ
           </Link>
-          <Link
-            href="/forgot-password"
-            className="text-gray-300 hover:text-white"
-          >
-            Forgot Password
+          <span className="text-gray-300">|</span>
+          <Link href="" className="text-gray-300 hover:text-white">
+            Connexion
           </Link>
         </div>
       </div>
