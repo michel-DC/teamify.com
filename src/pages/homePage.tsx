@@ -5,6 +5,24 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Button } from "@/components/ui/Button";
 import { Navbar } from "@/components/_layout/Navbar";
 
+const features = [
+  {
+    title: "Planification",
+    description:
+      "Organisez vos événements facilement avec notre outil de planification.",
+  },
+  {
+    title: "Collaboration",
+    description:
+      "Travaillez avec votre équipe en temps réel pour une meilleure coordination.",
+  },
+  {
+    title: "Suivi",
+    description:
+      "Suivez l'avancement de vos événements et ajustez vos plans en conséquence.",
+  },
+];
+
 export const HomePage = () => {
   return (
     <div>
@@ -23,8 +41,7 @@ export const HomePage = () => {
           fill="white"
         />
         <div className="relative z-10 p-8 mx-auto mt-20 w-full max-w-5xl text-center">
-          {" "}
-          {/* add an margin top to separe navbar and hero section */}
+          {/* add a margin top to separate navbar and hero section */}
           <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 opacity-0 md:text-7xl animate-fadeIn">
             Bienvenue sur{" "}
             <b className="inline-block relative">
@@ -86,7 +103,7 @@ export const HomePage = () => {
               </Button>
             </div>
           </div>
-          <div className="mt-16 text-center">
+          <div className="z-10 mt-16 text-center">
             <h2 className="text-4xl font-semibold text-gray-200">
               Avec nous vous pourrez :
             </h2>
@@ -94,18 +111,20 @@ export const HomePage = () => {
               Découvrez nos outils pour simplifier l'organisation de vos
               événements.
             </p>
-            <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-3">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="p-6 bg-gray-900 rounded-xl border border-gray-800 shadow-md transition-transform transform hover:scale-105 hover:shadow-lg hover:cursor-help"
-                >
-                  <h3 className="text-2xl font-bold text-white">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-2 text-gray-400">{feature.description}</p>
-                </div>
-              ))}
+            <div className="mt-16 w-full max-w-5xl">
+              <div className="grid grid-cols-1 gap-6 mt-8 mb-12 cursor-help md:grid-cols-3">
+                {features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="p-6 bg-gray-900 rounded-lg border border-gray-800 transition hover:scale-105 hover:border-indigo-500"
+                  >
+                    <h3 className="text-xl font-bold text-white">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-2 text-gray-400">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -113,21 +132,3 @@ export const HomePage = () => {
     </div>
   );
 };
-
-const features = [
-  {
-    title: "Planification",
-    description:
-      "Organisez vos événements facilement avec notre outil de planification.",
-  },
-  {
-    title: "Collaboration",
-    description:
-      "Travaillez avec votre équipe en temps réel pour une meilleure coordination.",
-  },
-  {
-    title: "Suivi",
-    description:
-      "Suivez l'avancement de vos événements et ajustez vos plans en conséquence.",
-  },
-];
