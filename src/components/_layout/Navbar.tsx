@@ -32,7 +32,7 @@ export const Navbar = () => {
             FAQ
           </Link>
           <span className="text-gray-300">|</span>
-          <Link href="" className="text-gray-300 hover:text-white">
+          <Link href="/auth/login" className="text-gray-300 hover:text-white">
             Connexion
           </Link>
         </div>
