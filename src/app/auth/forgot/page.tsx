@@ -1,10 +1,10 @@
 import React from "react";
 import { ForgotPassword } from "@/components/auth/ForgotPassword";
 
-export const Forgot = () => {
+export default function ForgotPage() {
   return (
     <div>
       <ForgotPassword />
     </div>
   );
-};
+}
