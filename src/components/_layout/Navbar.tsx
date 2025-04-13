@@ -8,13 +8,15 @@ export const Navbar = () => {
     <nav className="sticky top-0 z-50 p-4 w-full backdrop-blur-xl bg-black/50">
       <div className="container flex relative justify-between items-center mx-auto">
         <div className="w-auto h-12">
-          <Image
-            width={500}
-            height={100}
-            src="/images/logo/noir-rb.png"
-            alt="Teamify Logo"
-            className="object-contain w-full h-full"
-          />
+          <Link href="/">
+            <Image
+              width={500}
+              height={100}
+              src="/images/logo/noir-rb.png"
+              alt="Teamify Logo"
+              className="object-contain w-full h-full"
+            />
+          </Link>
         </div>
         <div className="relative space-x-4">
           <Link

@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Button } from "@/components/ui/Button";
 import { Navbar } from "@/components/_layout/Navbar";
+import { Footer } from "@/components/_layout/Footer";
+import { Separator } from "@/components/ui/separator";
 
 const features = [
   {
@@ -128,6 +130,10 @@ export const HomePage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <Separator />
+      <div className="bottom-0 w-full z-[999] relative">
+        <Footer />
       </div>
     </div>
   );
