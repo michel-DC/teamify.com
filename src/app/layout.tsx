@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "../styles/globals.css";
-import { Navbar } from "@/components/_layout/Navbar";
+import Link from "next/link";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
 
@@ -20,6 +20,9 @@ export default function RootLayout({
       lang="fr"
       className={`${poppins.className} h-full bg-background text-foreground`}
     >
+      <head>
+        <link rel="icon" type="image/png" href="/images/logo/noir-rb.png" />
+      </head>
       <body>{children}</body>
     </html>
   );

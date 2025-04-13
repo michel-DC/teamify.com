@@ -65,6 +65,7 @@ export const RegisterForm = () => {
           <Link
             href="/auth/login"
             className="flex justify-center items-center pt-4 text-sm text-neutral-700 dark:text-neutral-300 hover:underline"
+            prefetch={false}
           >
             Déjà un compte ? Connectez-vous
           </Link>

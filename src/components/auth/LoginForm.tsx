@@ -51,6 +51,7 @@ export const LoginForm = () => {
           <Link
             href="/auth/forgot"
             className="flex justify-center items-center pt-4 text-sm text-neutral-700 dark:text-neutral-300 hover:underline"
+            prefetch={false}
           >
             Mot de passe oublié ?
           </Link>
@@ -58,6 +59,7 @@ export const LoginForm = () => {
           <Link
             href="/auth/register"
             className="flex justify-center items-center pt-4 mt-4 text-sm text-neutral-700 dark:text-neutral-300 hover:underline"
+            prefetch={false}
           >
             Pas encore de compte ? Créer en un
           </Link>

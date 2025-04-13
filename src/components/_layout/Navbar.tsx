@@ -48,6 +48,7 @@ export const Navbar = () => {
           <Link
             href="/auth/login"
             className="text-gray-300 cursor-pointer hover:text-white"
+            prefetch={false}
           >
             Connexion
           </Link>
