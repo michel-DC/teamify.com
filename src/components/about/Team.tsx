@@ -9,7 +9,7 @@ export default function Team() {
           Notre Équipe
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <div className="overflow-hidden relative mb-4 w-full h-64 rounded-lg">
               <Image
                 src="/images/about/image-homme-equipe.png"
@@ -21,7 +21,7 @@ export default function Team() {
             <h3 className="text-xl font-bold text-gray-200">Jean Dupont</h3>
             <p className="text-gray-400">CEO & Fondateur</p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <div className="overflow-hidden relative mb-4 w-full h-64 rounded-lg">
               <Image
                 src="/images/about/image-homme-equipe.png"
@@ -33,7 +33,7 @@ export default function Team() {
             <h3 className="text-xl font-bold text-gray-200">Marie Leroy</h3>
             <p className="text-gray-400">CTO & Co-fondatrice</p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <div className="overflow-hidden relative mb-4 w-full h-64 rounded-lg">
               <Image
                 src="/images/about/image-homme-equipe.png"
@@ -45,7 +45,7 @@ export default function Team() {
             <h3 className="text-xl font-bold text-gray-200">Pierre Martin</h3>
             <p className="text-gray-400">CMO</p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <div className="overflow-hidden relative mb-4 w-full h-64 rounded-lg">
               <Image
                 src="/images/about/image-homme-equipe.png"
@@ -57,7 +57,7 @@ export default function Team() {
             <h3 className="text-xl font-bold text-gray-200">Thomas Moreau</h3>
             <p className="text-gray-400">Lead Developer</p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <div className="overflow-hidden relative mb-4 w-full h-64 rounded-lg">
               <Image
                 src="/images/about/image-homme-equipe.png"
@@ -69,7 +69,7 @@ export default function Team() {
             <h3 className="text-xl font-bold text-gray-200">Sophie Lambert</h3>
             <p className="text-gray-400">UX Designer</p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <div className="overflow-hidden relative mb-4 w-full h-64 rounded-lg">
               <Image
                 src="/images/about/image-homme-equipe.png"

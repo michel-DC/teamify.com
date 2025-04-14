@@ -8,7 +8,7 @@ export default function Values() {
           Nos Valeurs
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <h3 className="text-xl font-bold text-gray-200">Innovation</h3>
             <p className="text-gray-400">
               Nous repoussons constamment les limites de la technologie pour
@@ -17,7 +17,7 @@ export default function Values() {
               tempora error ad exercitationem, quaerat.
             </p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <h3 className="text-xl font-bold text-gray-200">Collaboration</h3>
             <p className="text-gray-400">
               Nous croyons en la puissance du travail d'équipe, tant en interne
@@ -26,7 +26,7 @@ export default function Values() {
               distinctio ipsam voluptas id temporibus magni labore.
             </p>
           </div>
-          <div className="p-6 bg-gray-900 rounded-lg">
+          <div className="p-6 bg-gray-800 rounded-lg">
             <h3 className="text-xl font-bold text-gray-200">Transparence</h3>
             <p className="text-gray-400">
               Nous maintenons une communication ouverte et honnête avec toutes

@@ -21,14 +21,14 @@ export default function About() {
             "[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]"
           )}
         />
-        <div className="relative z-20">
+        <div className="z-20 space-y-12">
           <AboutSection />
           <Team />
           <Values />
           <Testimonial02 />
         </div>
       </div>
-      <Separator className="z-10 bg-white" />
+      <Separator className="z-10 my-1 bg-white" />
       <div className="relative bottom-0 w-full">
         <Footer />
       </div>

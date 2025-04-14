@@ -62,16 +62,16 @@ const testimonials = [
 ];
 
 const Testimonial02 = () => (
-  <div className="flex justify-center items-center px-6 py-12 min-h-screen">
-    <div>
+  <div className="px-6 py-12">
+    <div className="mx-auto max-w-screen-xl">
       <h2 className="mb-8 text-3xl font-bold text-center text-gray-200">
         Témoignages
       </h2>
-      <div className="gap-8 mx-auto max-w-screen-xl columns-1 md:columns-2 lg:columns-3">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {testimonials.map((testimonial) => (
           <div
             key={testimonial.id}
-            className="mb-8 rounded-xl p-6 break-inside-avoid shadow-[0px_0px_16px_0px_rgba(0,_0,_0,_0.1)] bg-gray-900"
+            className="p-6 bg-gray-800 rounded-xl shadow-lg transition-transform hover:scale-105"
           >
             <div className="flex justify-between items-center">
               <div className="flex gap-4 items-center">

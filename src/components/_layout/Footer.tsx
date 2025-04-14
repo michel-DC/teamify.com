@@ -10,7 +10,7 @@ export const Footer = () => {
           "[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]"
         )}
       />
-      <div className="px-4 w-full max-w-7xl">
+      <div className="px-4 w-full max-w-7xl z-99">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-xl font-bold">Teamify</h3>
