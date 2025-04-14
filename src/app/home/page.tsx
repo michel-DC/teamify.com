@@ -43,7 +43,6 @@ export const HomePage = () => {
           fill="white"
         />
         <div className="relative z-10 p-8 mx-auto mt-20 w-full max-w-5xl text-center">
-          {/* add a margin top to separate navbar and hero section */}
           <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 opacity-0 md:text-7xl animate-fadeIn">
             Bienvenue sur{" "}
             <b className="inline-block relative">

@@ -18,7 +18,7 @@ export const RegisterForm = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="p-4 mx-auto w-full max-w-md bg-white border border-solid shadow-input md:rounded-2xl md:p-8 dark:bg-black sm:max-w-sm">
+      <div className="p-4 mx-auto w-full max-w-md bg-white rounded-none border border-solid shadow-input md:rounded-2xl md:p-8 dark:bg-black">
         <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
           Bienvenue sur Teamify
         </h2>
@@ -45,11 +45,11 @@ export const RegisterForm = () => {
             <Input id="password" placeholder="••••••••" type="password" />
           </LabelInputContainer>
           <LabelInputContainer className="mb-8">
-            <Label htmlFor="twitterpassword">
+            <Label htmlFor="confirmpassword">
               Confirmez votre mot de passe
             </Label>
             <Input
-              id="twitterpassword"
+              id="confirmpassword"
               placeholder="••••••••"
               type="password"
             />

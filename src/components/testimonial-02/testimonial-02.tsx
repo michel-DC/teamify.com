@@ -64,6 +64,9 @@ const testimonials = [
 const Testimonial02 = () => (
   <div className="flex justify-center items-center px-6 py-12 min-h-screen">
     <div>
+      <h2 className="mb-8 text-3xl font-bold text-center text-gray-200">
+        Témoignages
+      </h2>
       <div className="gap-8 mx-auto max-w-screen-xl columns-1 md:columns-2 lg:columns-3">
         {testimonials.map((testimonial) => (
           <div

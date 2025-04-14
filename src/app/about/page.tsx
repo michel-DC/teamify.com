@@ -11,7 +11,7 @@ import AboutSection from "@/components/about/AboutSection";
 export default function About() {
   return (
     <div>
-      <div className="absolute top-0 z-10 mb-8 w-full">
+      <div className="absolute top-0 w-full">
         <Navbar />
       </div>
       <div className="relative flex flex-col items-center justify-center min-h-screen w-full overflow-hidden rounded-md bg-black/[0.96] antialiased">
@@ -25,16 +25,11 @@ export default function About() {
           <AboutSection />
           <Team />
           <Values />
-          <div className="mt-20">
-            <h2 className="text-3xl font-bold text-center text-gray-200">
-              Témoignages
-            </h2>
-            <Testimonial02 />
-          </div>
+          <Testimonial02 />
         </div>
       </div>
-      <Separator />
-      <div className="bottom-0 w-full z-[999] relative">
+      <Separator className="z-10 bg-white" />
+      <div className="relative bottom-0 w-full">
         <Footer />
       </div>
     </div>

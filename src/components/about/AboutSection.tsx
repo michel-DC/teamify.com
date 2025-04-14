@@ -6,7 +6,7 @@ export default function AboutSection() {
     <div>
       <div className="relative z-10 p-8 mx-auto mt-32 w-full max-w-7xl">
         <h1 className="text-6xl font-extrabold text-center text-gray-200 bg-clip-text md:text-7xl">
-          À propos de Teamify
+          À propos de <span className="text-purple-500">Teamify</span>
         </h1>
 
         <div className="grid grid-cols-1 gap-12 mt-12 md:grid-cols-2">

@@ -14,9 +14,7 @@ export default function Values() {
               Nous repoussons constamment les limites de la technologie pour
               offrir des solutions innovantes. Lorem ipsum dolor sit amet
               consectetur adipisicing elit. Obcaecati vitae vel molestiae
-              tempora error ad exercitationem, quaerat eveniet provident sit
-              aspernatur. Facere provident fuga quia vitae quasi itaque? Ab,
-              vitae?
+              tempora error ad exercitationem, quaerat.
             </p>
           </div>
           <div className="p-6 bg-gray-900 rounded-lg">
@@ -25,8 +23,7 @@ export default function Values() {
               Nous croyons en la puissance du travail d'équipe, tant en interne
               qu'avec nos clients. Lorem ipsum dolor sit amet, consectetur
               adipisicing elit. Aliquid consequatur a culpa exercitationem
-              distinctio ipsam voluptas id temporibus magni labore, ea veritatis
-              accusamus et impedit repellendus. Quia rerum eos tempore?
+              distinctio ipsam voluptas id temporibus magni labore.
             </p>
           </div>
           <div className="p-6 bg-gray-900 rounded-lg">
@@ -35,9 +32,7 @@ export default function Values() {
               Nous maintenons une communication ouverte et honnête avec toutes
               les parties prenantes. Lorem, ipsum dolor sit amet consectetur
               adipisicing elit. Unde ullam reprehenderit deserunt aspernatur
-              animi sed necessitatibus ex optio minus deleniti neque provident
-              doloremque, veritatis quod possimus, eligendi molestias, cum
-              cupiditate.
+              animi sed necessitatibus ex optio minus deleniti neque.
             </p>
           </div>
         </div>

@@ -3,14 +3,14 @@ import { cn } from "@/lib/utils";
 
 export const Footer = () => {
   return (
-    <footer className="relative w-full bg-black/[0.96] text-white py-12">
+    <footer className="relative w-full bg-black/[0.96] text-white py-12 flex justify-center">
       <div
         className={cn(
           "pointer-events-none absolute inset-0 [background-size:40px_40px] select-none",
           "[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]"
         )}
       />
-      <div className="container px-4 mx-auto">
+      <div className="px-4 w-full max-w-7xl">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-xl font-bold">Teamify</h3>
