@@ -1,0 +1,5 @@
+pour le dashboard utiliser la side bar incroyable de shadcn ui -> https://ui.shadcn.com/docs/components/sidebar
+
+peut être utile pour signaler une validation -> https://ui.shadcn.com/docs/components/sonner
+
+pour la page blog -> https://next-blog-starter.vercel.app/  https://prismic.io/blog/nextjs-blog-templates#2-stablo-template

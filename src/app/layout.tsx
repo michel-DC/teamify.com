@@ -20,9 +20,6 @@ export default function RootLayout({
       lang="fr"
       className={`${poppins.className} h-full bg-background text-foreground`}
     >
-      <head>
-        <link rel="icon" type="image/png" href="/images/logo/noir-rb.png" />
-      </head>
       <body>{children}</body>
     </html>
   );
