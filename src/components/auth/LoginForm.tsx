@@ -1,30 +1,67 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/Input";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import {
-  IconBrandGoogle,
-  IconBrandApple,
-  IconBrandFacebook,
-} from "@tabler/icons-react";
-import { useRouter } from "next/navigation"; // Corrected import for useRouter
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
-  };
+    setError(null);
+    setLoading(true);
 
-  const handleForgotPassword = () => {
-    router.push("/auth/forgot"); // Redirect to forgot password page
+    try {
+      const res = await fetch("../API/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const text = await res.text();
+      console.log("Raw response:", text);
+
+      if (res.ok) {
+        const data = JSON.parse(text);
+        console.log("Login success:", data);
+        toast.success("Vous êtes maintenant connecté!", {
+          duration: 3500,
+          onAutoClose: () => {
+            router.push("/dashboard");
+          },
+        });
+      } else {
+        try {
+          const data = JSON.parse(text);
+          setError(data.error || "Erreur lors de la connexion");
+          console.error("Login error:", data);
+        } catch (err) {
+          setError("Erreur serveur: réponse non valide");
+          console.error("Failed to parse error response:", text);
+        }
+      }
+    } catch (err) {
+      setError("Erreur réseau");
+      console.error("Network error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <Toaster position="top-center" richColors />
       <div className="p-4 mx-auto w-full max-w-md bg-white rounded-none border border-solid shadow-input md:rounded-2xl md:p-8 dark:bg-black">
         <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
           Vous revoilà
@@ -32,20 +69,39 @@ export const LoginForm = () => {
         <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
           Connectez-vous pour accéder à votre espace et créer votre évènement
         </p>
+
         <form className="my-8" onSubmit={handleSubmit}>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Adresse mail</Label>
-            <Input id="email" placeholder="email@gmail.com" type="email" />
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="email@gmail.com"
+              required
+            />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="password">Mot de passe</Label>
-            <Input id="password" placeholder="••••••••" type="password" />
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
           </LabelInputContainer>
+          {error && (
+            <p className="mb-4 text-sm text-center text-red-500">{error}</p>
+          )}
           <button
-            className="group/btn relative block h-10 mb-4 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] cursor-pointer"
+            className="block relative mb-4 w-full h-10 font-medium text-white bg-gradient-to-br from-black rounded-md group/btn to-neutral-600 shadow-input dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900"
             type="submit"
+            disabled={loading}
           >
-            Se connecter &rarr;
+            {loading ? "Connexion en cours..." : "Se connecter →"}
             <BottomGradient />
           </button>
           <Link
@@ -55,7 +111,6 @@ export const LoginForm = () => {
           >
             Mot de passe oublié ?
           </Link>
-
           <Link
             href="/auth/register"
             className="flex justify-center items-center pt-4 mt-4 text-sm text-neutral-700 dark:text-neutral-300 hover:underline"
@@ -63,41 +118,6 @@ export const LoginForm = () => {
           >
             Pas encore de compte ? Créer en un
           </Link>
-
-          <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
-
-          {/* <div className="flex flex-col space-y-4">
-            <button
-              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626] cursor-pointer"
-              type="button"
-            >
-              <IconBrandGoogle className="w-4 h-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                Google
-              </span>
-              <BottomGradient />
-            </button>
-            <button
-              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626] cursor-pointer"
-              type="button"
-            >
-              <IconBrandApple className="w-4 h-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                Apple
-              </span>
-              <BottomGradient />
-            </button>
-            <button
-              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626] cursor-pointer"
-              type="button"
-            >
-              <IconBrandFacebook className="w-4 h-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                Facebook
-              </span>
-              <BottomGradient />
-            </button>
-          </div> */}
         </form>
       </div>
     </div>
