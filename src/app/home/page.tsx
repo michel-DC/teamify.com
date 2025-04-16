@@ -56,7 +56,7 @@ export const HomePage = () => {
           fill="white"
         />
         <div className="relative z-10 p-8 mx-auto mt-20 w-full max-w-5xl text-center mb-32">
-          <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 opacity-0 md:text-7xl animate-fadeIn">
+          <h1 className="text-4xl md:text-7xl mt-16 md:mt-32 mb-4 md:mb-6 font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 opacity-0 animate-fadeIn">
             Bienvenue sur{" "}
             <b className="inline-block relative">
               <svg
