@@ -35,12 +35,15 @@ export const LoginForm = () => {
       if (res.ok) {
         const data = JSON.parse(text);
         console.log("Login success:", data);
-        toast.success("Vous êtes maintenant connecté!", {
-          duration: 3500,
-          onAutoClose: () => {
-            router.push("/dashboard");
-          },
-        });
+        toast.success(
+          `Vous êtes maintenant connecté en tant que ${data.user.firstname}!`,
+          {
+            duration: 2500, // real value is 3500, the value here is for the test
+            onAutoClose: () => {
+              router.push("/dashboard");
+            },
+          }
+        );
       } else {
         try {
           const data = JSON.parse(text);
@@ -97,7 +100,7 @@ export const LoginForm = () => {
             <p className="mb-4 text-sm text-center text-red-500">{error}</p>
           )}
           <button
-            className="block relative mb-4 w-full h-10 font-medium text-white bg-gradient-to-br from-black rounded-md group/btn to-neutral-600 shadow-input dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900"
+            className="block relative mb-4 w-full h-10 font-medium text-white bg-gradient-to-br from-black rounded-md group/btn to-neutral-600 shadow-input dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 cursor-pointer"
             type="submit"
             disabled={loading}
           >

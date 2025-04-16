@@ -42,7 +42,7 @@ export const HomePage = () => {
           className="left-0 -top-40 md:-top-20 md:left-60"
           fill="white"
         />
-        <div className="relative z-10 p-8 mx-auto mt-20 w-full max-w-5xl text-center">
+        <div className="relative z-10 p-8 mx-auto mt-20 w-full max-w-5xl text-center mb-32">
           <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 opacity-0 md:text-7xl animate-fadeIn">
             Bienvenue sur{" "}
             <b className="inline-block relative">
@@ -130,7 +130,7 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      <Separator />
+      <Separator className="z-10 my-0.5 bg-white" />
       <div className="bottom-0 w-full z-[999] relative">
         <Footer />
       </div>
