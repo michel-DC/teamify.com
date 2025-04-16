@@ -13,6 +13,8 @@ import {
   faCalendarAlt,
   faUsers,
   faChartLine,
+  faArrowRight,
+  faRocket,
 } from "@fortawesome/free-solid-svg-icons";
 
 const features = [
