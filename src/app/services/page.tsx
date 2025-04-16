@@ -23,7 +23,7 @@ export default function Services() {
             <Service23 />
           </div>
         </div>
-        <Separator className="z-10 my-1 bg-white" />
+        <Separator className="z-10 my-3 bg-white h-[4px] w-full" />
         <div className="relative bottom-0 w-full">
           <Footer />
         </div>

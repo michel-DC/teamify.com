@@ -84,7 +84,7 @@ export const ServiceItem: React.FC<ServiceItemProps> = ({ service }) => (
 export const Service23: React.FC = () => {
   return (
     <section className="py-14 md:py-24 text-white">
-      <h1 className="text-6xl font-extrabold text-center text-gray-200 bg-clip-text md:text-7xl mb-12">
+      <h1 className="text-6xl font-extrabold text-center text-gray-200 bg-clip-text md:text-7xl mb-24">
         Les services que proposent{" "}
         <span className="text-purple-500">Teamify</span>
       </h1>

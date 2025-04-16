@@ -1,27 +1,38 @@
 "use client";
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Button } from "@/components/ui/Button";
 import { Navbar } from "@/components/_layout/Navbar";
 import { Footer } from "@/components/_layout/Footer";
 import { Separator } from "@/components/ui/separator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarAlt,
+  faUsers,
+  faChartLine,
+} from "@fortawesome/free-solid-svg-icons";
 
 const features = [
   {
     title: "Planification",
     description:
       "Organisez vos événements facilement avec notre outil de planification.",
+    icon: faCalendarAlt,
   },
   {
     title: "Collaboration",
     description:
       "Travaillez avec votre équipe en temps réel pour une meilleure coordination.",
+    icon: faUsers,
   },
   {
     title: "Suivi",
     description:
       "Suivez l'avancement de vos événements et ajustez vos plans en conséquence.",
+    icon: faChartLine,
   },
 ];
 
@@ -88,7 +99,7 @@ export const HomePage = () => {
               animation: fadeIn 1s forwards;
             }
           `}</style>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-300">
+          <p className="mx-auto mt4 max-w-2xl text-lg text-gray-300">
             Organisez vos événements de manière efficace et collaborative avec
             notre plateforme intuitive.
           </p>
@@ -99,9 +110,11 @@ export const HomePage = () => {
                 placeholder="Votre email"
                 className="px-5 py-3 w-full text-white bg-gray-800 rounded-r-lg rounded-l-lg border border-gray-700 focus:ring-2 focus:ring-indigo-500"
               />
-              <Button className="absolute top-0 right-0 px-6 py-3 h-full text-white bg-indigo-600 cursor-pointer hover:bg-indigo-700">
-                Commencer
-              </Button>
+              <Link href="/auth/register">
+                <Button className="absolute top-0 right-0 px-6 py-3 h-full text-white bg-indigo-600 cursor-pointer hover:bg-indigo-700">
+                  Commencer
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="z-10 mt-16 text-center">
@@ -119,12 +132,45 @@ export const HomePage = () => {
                     key={index}
                     className="p-6 bg-gray-900 rounded-lg border border-gray-800 transition hover:scale-105 hover:border-indigo-500"
                   >
-                    <h3 className="text-xl font-bold text-white">
-                      {feature.title}
-                    </h3>
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 p-2 bg-purple-500 rounded-lg flex items-center justify-center">
+                        <FontAwesomeIcon
+                          icon={feature.icon}
+                          className="text-white text-lg"
+                        />
+                      </div>
+                      <h3 className="text-xl font-bold text-white ml-4">
+                        {feature.title}
+                      </h3>
+                    </div>
                     <p className="mt-2 text-gray-400">{feature.description}</p>
                   </div>
                 ))}
+              </div>
+              <div className="mt-24 flex flex-col md:flex-row items-center justify-between gap-12">
+                <div className="space-y-8 max-w-2xl">
+                  <h2 className="text-4xl font-bold text-gray-200">
+                    Prêt à révolutionner votre gestion d'événements ?
+                  </h2>
+                  <p className="text-lg text-gray-400">
+                    Rejoignez des milliers d'équipes qui ont simplifié leur
+                    organisation avec Teamify. Commencez dès aujourd'hui et
+                    découvrez une nouvelle façon de collaborer.
+                  </p>
+                  <Link href="/auth/register">
+                    <Button className="px-8 py-4 text-lg px-6 py-3 bg-indigo-600 hover:bg-indigo-800 text-white rounded-lg cursor-pointer p-6">
+                      Essayer gratuitement
+                    </Button>
+                  </Link>
+                </div>
+                <div className="relative w-full max-w-xl h-96 rounded-lg overflow-hidden">
+                  <Image
+                    src="/images/illustration/illustration-team.png"
+                    alt="Équipe en collaboration"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
