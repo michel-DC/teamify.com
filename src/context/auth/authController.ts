@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import router from "next/router";
 import { toast } from "sonner";
 
 export const useAuth = () => {
@@ -15,7 +16,7 @@ export const useAuth = () => {
 
   const logout = () => {
     localStorage.removeItem("isLoggedIn");
-    toast.success("Vous avez été déconnecté avec succès.");
+    toast.success("Vous avez été déconnecté avec succès.", { duration: 3000 });
     window.location.href = "/";
   };
 

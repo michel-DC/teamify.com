@@ -35,6 +35,7 @@ export const LoginForm = () => {
       if (res.ok) {
         const data = JSON.parse(text);
         console.log("Login success:", data);
+        localStorage.setItem("isLoggedIn", "true");
         toast.success(
           `Vous êtes maintenant connecté en tant que ${data.user.firstname}!`,
           {
