@@ -19,7 +19,7 @@ export default function Faq() {
           )}
         />
         <div className="z-20 w-full">
-          <div className="relative z-10 p-8 mx-auto w-full max-w-7xl mb-64">
+          <div className="relative z-10 p-8 mx-auto w-full max-w-7xl mb-12">
             <FaqSection />
           </div>
         </div>

@@ -1,11 +1,11 @@
 import React from "react";
 import { Navbar } from "@/components/_layout/Navbar";
 import { cn } from "@/lib/utils";
-import { Service23 } from "@/components/services/Services-02";
 import { Footer } from "@/components/_layout/Footer";
 import { Separator } from "@radix-ui/react-separator";
+import BlogSection from "@/components/blog/BlogSection";
 
-export default function Services() {
+export default function Blog() {
   return (
     <div>
       <div className="absolute top-0 w-full">
@@ -19,8 +19,8 @@ export default function Services() {
           )}
         />
         <div className="z-20 w-full">
-          <div className="relative mt-12 z-10 p-8 mx-auto w-full max-w-7xl">
-            <Service23 />
+          <div className="relative z-10 p-8 mx-auto w-full max-w-7xl">
+            <BlogSection />
           </div>
         </div>
         <Separator className="z-10 my-3 bg-white h-[4px] w-full" />

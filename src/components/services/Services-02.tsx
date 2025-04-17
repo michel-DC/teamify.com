@@ -84,15 +84,14 @@ export const ServiceItem: React.FC<ServiceItemProps> = ({ service }) => (
 export const Service23: React.FC = () => {
   return (
     <section className="py-14 md:py-24 text-white">
-      <h1 className="text-6xl font-extrabold text-center text-gray-200 bg-clip-text md:text-7xl mb-24">
-        Les services que proposent{" "}
-        <span className="text-purple-500">Teamify</span>
+      <h1 className="text-4xl font-extrabold text-center text-gray-200 bg-clip-text md:text-6xl mb-24">
+        Découvrez nos <span className="text-purple-500"> services</span>
       </h1>
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap"></div>
-        <div className="w-full flex flex-wrap">
+        <div className="w-full flex flex-wrap gap-y-8">
           {serviceList.map((service, i) => (
-            <div className="w-full md:w-1/2 lg:w-1/3 mt-4 px-2 h-full" key={i}>
+            <div className="w-full md:w-1/2 lg:w-1/3 px-2 h-full" key={i}>
               <ServiceItem service={service} />
             </div>
           ))}
