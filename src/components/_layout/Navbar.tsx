@@ -3,6 +3,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInfoCircle,
+  faCogs,
+  faNewspaper,
+  faQuestionCircle,
+  faSignInAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,11 +20,16 @@ export const Navbar = () => {
   };
 
   const navLinks = [
-    { href: "/about", text: "À Propos" },
-    { href: "/services", text: "Services" },
-    { href: "/blog", text: "Blog" },
-    { href: "/faq", text: "FAQ" },
-    { href: "/auth/login", text: "Connexion", prefetch: false },
+    { href: "/about", text: "À Propos", icon: faInfoCircle },
+    { href: "/services", text: "Services", icon: faCogs },
+    { href: "/blog", text: "Blog", icon: faNewspaper },
+    { href: "/faq", text: "FAQ", icon: faQuestionCircle },
+    {
+      href: "/auth/login",
+      text: "Connexion",
+      prefetch: false,
+      icon: faSignInAlt,
+    },
   ];
 
   return (
@@ -41,9 +54,10 @@ export const Navbar = () => {
               <React.Fragment key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-gray-300 cursor-pointer hover:text-indigo-500"
+                  className="flex items-center text-gray-300 cursor-pointer hover:text-indigo-500"
                   prefetch={link.prefetch}
                 >
+                  <FontAwesomeIcon icon={link.icon} className="mr-2" />
                   {link.text}
                 </Link>
                 {index < navLinks.length - 1 && (
@@ -70,10 +84,11 @@ export const Navbar = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block px-4 py-2 text-gray-300 hover:text-indigo-500"
+                  className="flex items-center px-4 py-2 text-gray-300 hover:text-indigo-500"
                   onClick={toggleMenu}
                   prefetch={link.prefetch}
                 >
+                  <FontAwesomeIcon icon={link.icon} className="mr-2" />
                   {link.text}
                 </Link>
               ))}

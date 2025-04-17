@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import Link from "next/link";
 
-const poppins = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"], // Add common weights you might need
+});
 
 export const metadata: Metadata = {
   title: "Teamify | Gestion d'événements en équipe",
@@ -18,12 +22,12 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${poppins.className} h-full bg-background text-foreground`}
+      className={`${inter.variable} h-full bg-background text-foreground`}
     >
       <head>
         <link rel="icon" href="/images/logo/favicon.png" type="image/x-icon" />
       </head>
-      <body>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
