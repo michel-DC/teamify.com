@@ -3,16 +3,16 @@ import React from "react";
 const posts = [
   {
     id: 1,
-    title: "Boost your conversion rate",
+    title: "Boostez votre taux de conversion",
     href: "#",
     description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+      "Découvrez des stratégies efficaces pour augmenter votre taux de conversion et maximiser vos ventes. Apprenez à optimiser votre site web et vos campagnes marketing.",
+    date: "16 mars 2023",
+    datetime: "2023-03-16",
     category: { title: "Marketing", href: "#" },
     author: {
-      name: "Michael Foster",
-      role: "Co-Founder / CTO",
+      name: "Jean Dupont",
+      role: "Expert en Marketing Digital",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -20,16 +20,16 @@ const posts = [
   },
   {
     id: 2,
-    title: "Improve your customer retention",
+    title: "Améliorez la fidélisation de vos clients",
     href: "#",
     description:
-      "Learn strategies to keep your customers engaged and loyal to your brand. Discover the latest trends in customer relationship management.",
-    date: "Apr 5, 2020",
-    datetime: "2020-04-05",
+      "Apprenez des stratégies pour fidéliser vos clients et renforcer leur engagement. Découvrez les dernières tendances en gestion de la relation client.",
+    date: "5 avril 2023",
+    datetime: "2023-04-05",
     category: { title: "Business", href: "#" },
     author: {
-      name: "Emma Johnson",
-      role: "Customer Success Manager",
+      name: "Marie Martin",
+      role: "Responsable Relation Client",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -37,16 +37,16 @@ const posts = [
   },
   {
     id: 3,
-    title: "The future of remote work",
+    title: "L'avenir du travail à distance",
     href: "#",
     description:
-      "Explore how remote work is shaping the future of businesses and what tools you need to stay productive in a distributed team environment.",
-    date: "May 12, 2020",
-    datetime: "2020-05-12",
-    category: { title: "Technology", href: "#" },
+      "Explorez comment le travail à distance transforme les entreprises et découvrez les outils essentiels pour rester productif dans un environnement distribué.",
+    date: "12 mai 2023",
+    datetime: "2023-05-12",
+    category: { title: "Technologie", href: "#" },
     author: {
-      name: "David Smith",
-      role: "Product Manager",
+      name: "Pierre Leroy",
+      role: "Chef de Produit",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -54,16 +54,16 @@ const posts = [
   },
   {
     id: 4,
-    title: "Mastering time management",
+    title: "Maîtrisez la gestion du temps",
     href: "#",
     description:
-      "Effective time management techniques to boost your productivity and achieve your goals faster. Learn how to prioritize and focus on what matters most.",
-    date: "Jun 20, 2020",
-    datetime: "2020-06-20",
-    category: { title: "Productivity", href: "#" },
+      "Découvrez des techniques efficaces de gestion du temps pour booster votre productivité et atteindre vos objectifs plus rapidement.",
+    date: "20 juin 2023",
+    datetime: "2023-06-20",
+    category: { title: "Productivité", href: "#" },
     author: {
-      name: "Sarah Lee",
-      role: "Productivity Coach",
+      name: "Sophie Lambert",
+      role: "Coach en Productivité",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -71,16 +71,16 @@ const posts = [
   },
   {
     id: 5,
-    title: "Building a strong company culture",
+    title: "Construire une culture d'entreprise forte",
     href: "#",
     description:
-      "Discover the key elements of creating a positive and productive company culture that attracts and retains top talent.",
-    date: "Jul 8, 2020",
-    datetime: "2020-07-08",
+      "Découvrez les éléments clés pour créer une culture d'entreprise positive et productive qui attire et retient les meilleurs talents.",
+    date: "8 juillet 2023",
+    datetime: "2023-07-08",
     category: { title: "Leadership", href: "#" },
     author: {
-      name: "James Wilson",
-      role: "HR Director",
+      name: "Thomas Moreau",
+      role: "Directeur RH",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -88,16 +88,16 @@ const posts = [
   },
   {
     id: 6,
-    title: "Effective team communication strategies",
+    title: "Stratégies de communication d'équipe efficaces",
     href: "#",
     description:
-      "Learn how to improve communication within your team to enhance collaboration and productivity. Discover tools and techniques for better team dynamics.",
-    date: "Aug 15, 2020",
-    datetime: "2020-08-15",
-    category: { title: "Teamwork", href: "#" },
+      "Apprenez à améliorer la communication au sein de votre équipe pour renforcer la collaboration et la productivité.",
+    date: "15 août 2023",
+    datetime: "2023-08-15",
+    category: { title: "Travail d'équipe", href: "#" },
     author: {
-      name: "Laura Brown",
-      role: "Communication Specialist",
+      name: "Camille Dubois",
+      role: "Spécialiste en Communication",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -105,50 +105,16 @@ const posts = [
   },
   {
     id: 7,
-    title: "Innovation in the digital age",
+    title: "L'innovation à l'ère numérique",
     href: "#",
     description:
-      "Explore how digital transformation is driving innovation across industries and what it means for the future of business.",
-    date: "Sep 22, 2020",
-    datetime: "2020-09-22",
+      "Explorez comment la transformation numérique stimule l'innovation dans tous les secteurs et ce que cela signifie pour l'avenir des entreprises.",
+    date: "22 septembre 2023",
+    datetime: "2023-09-22",
     category: { title: "Innovation", href: "#" },
     author: {
-      name: "Robert Taylor",
-      role: "Innovation Consultant",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  {
-    id: 8,
-    title: "Innovation in the digital age",
-    href: "#",
-    description:
-      "Explore how digital transformation is driving innovation across industries and what it means for the future of business.",
-    date: "Sep 22, 2020",
-    datetime: "2020-09-22",
-    category: { title: "Innovation", href: "#" },
-    author: {
-      name: "Robert Taylor",
-      role: "Innovation Consultant",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  {
-    id: 9,
-    title: "Innovation in the digital age",
-    href: "#",
-    description:
-      "Explore how digital transformation is driving innovation across industries and what it means for the future of business.",
-    date: "Sep 22, 2020",
-    datetime: "2020-09-22",
-    category: { title: "Innovation", href: "#" },
-    author: {
-      name: "Robert Taylor",
-      role: "Innovation Consultant",
+      name: "Alexandre Roux",
+      role: "Consultant en Innovation",
       href: "#",
       imageUrl:
         "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
