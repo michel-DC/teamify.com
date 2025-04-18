@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const posts = [
   {
@@ -120,6 +121,40 @@ const posts = [
         "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
   },
+  {
+    id: 8,
+    title: "L'innovation à l'ère numérique",
+    href: "#",
+    description:
+      "Explorez comment la transformation numérique stimule l'innovation dans tous les secteurs et ce que cela signifie pour l'avenir des entreprises.",
+    date: "22 septembre 2023",
+    datetime: "2023-09-22",
+    category: { title: "Innovation", href: "#" },
+    author: {
+      name: "Alexandre Roux",
+      role: "Consultant en Innovation",
+      href: "#",
+      imageUrl:
+        "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+  },
+  {
+    id: 9,
+    title: "L'innovation à l'ère numérique",
+    href: "#",
+    description:
+      "Explorez comment la transformation numérique stimule l'innovation dans tous les secteurs et ce que cela signifie pour l'avenir des entreprises.",
+    date: "22 septembre 2023",
+    datetime: "2023-09-22",
+    category: { title: "Innovation", href: "#" },
+    author: {
+      name: "Alexandre Roux",
+      role: "Consultant en Innovation",
+      href: "#",
+      imageUrl:
+        "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    },
+  },
 ];
 
 export default function BlogSection() {
@@ -161,9 +196,11 @@ export default function BlogSection() {
                   </p>
                 </div>
                 <div className="relative mt-6 flex items-center gap-x-4">
-                  <img
-                    alt=""
+                  <Image
+                    alt="profile-picture-user"
                     src={post.author.imageUrl}
+                    width="40"
+                    height="40"
                     className="size-10 rounded-full bg-gray-800"
                   />
                   <div className="text-sm">
@@ -178,6 +215,23 @@ export default function BlogSection() {
                 </div>
               </article>
             ))}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <button className="inline-flex items-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors cursor-pointer">
+              Voir plus d'articles
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="ml-2 h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>

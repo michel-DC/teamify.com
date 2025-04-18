@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Label } from "../ui/label";
 import { Input } from "../ui/Input";
@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { Sun, Moon } from "lucide-react";
 
 export const RegisterForm = () => {
   const router = useRouter();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -19,6 +21,27 @@ export const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    } else {
+      const isDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setTheme(isDarkMode ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", isDarkMode);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,8 +66,8 @@ export const RegisterForm = () => {
 
       if (res.ok) {
         const data = JSON.parse(text);
-        toast.success("Compte créé avec succès!", {
-          duration: 3500,
+        toast.success(`Bienvenue sur teamify ${lastname}`, {
+          duration: 4000,
           onAutoClose: () => {
             router.push("/auth/login");
           },
@@ -68,19 +91,30 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-background px-4">
+      <button
+        onClick={toggleTheme}
+        className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200"
+        aria-label="Toggle theme"
+      >
+        {theme === "light" ? (
+          <Moon className="w-5 h-5 text-foreground" />
+        ) : (
+          <Sun className="w-5 h-5 text-foreground" />
+        )}
+      </button>
       <Toaster position="top-center" richColors />
-      <div className="p-4 mx-auto w-full max-w-md bg-white rounded-none border border-solid shadow-input md:rounded-2xl md:p-8 dark:bg-black">
-        <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+      <div className="p-6 sm:p-8 w-full max-w-md bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-lg sm:text-xl font-medium text-foreground">
           Bienvenue sur Teamify
         </h2>
-        <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="mt-2 text-sm sm:text-base text-muted-foreground">
           Inscrivez-vous pour accéder à votre espace et créer votre évènement
         </p>
 
-        <form className="my-8" onSubmit={handleSubmit}>
-          <div className="flex flex-col mb-4 space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-            <LabelInputContainer className="flex-1">
+        <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
+          <div className="space-y-4">
+            <LabelInputContainer>
               <Label htmlFor="firstname">Nom</Label>
               <Input
                 id="firstname"
@@ -89,9 +123,10 @@ export const RegisterForm = () => {
                 placeholder="Tyler"
                 type="text"
                 required
+                className="bg-secondary"
               />
             </LabelInputContainer>
-            <LabelInputContainer className="flex-1">
+            <LabelInputContainer>
               <Label htmlFor="lastname">Prénom</Label>
               <Input
                 id="lastname"
@@ -99,64 +134,64 @@ export const RegisterForm = () => {
                 onChange={(e) => setLastname(e.target.value)}
                 placeholder="Durden"
                 type="text"
+                className="bg-secondary"
+              />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="email">Adresse mail</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="email@gmail.com"
+                required
+                className="bg-secondary"
+              />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="password">Mot de passe</Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                className="bg-secondary"
+              />
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="confirmpassword">
+                Confirmez votre mot de passe
+              </Label>
+              <Input
+                id="confirmpassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                className="bg-secondary"
               />
             </LabelInputContainer>
           </div>
 
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="email">Adresse mail</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="email@gmail.com"
-              required
-            />
-          </LabelInputContainer>
-
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="password">Mot de passe</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-          </LabelInputContainer>
-
-          <LabelInputContainer className="mb-8">
-            <Label htmlFor="confirmpassword">
-              Confirmez votre mot de passe
-            </Label>
-            <Input
-              id="confirmpassword"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-          </LabelInputContainer>
-
           {error && (
-            <p className="mb-4 text-sm text-center text-red-500">{error}</p>
+            <p className="mt-4 text-sm text-center text-destructive">{error}</p>
           )}
 
           <button
-            className="block relative mb-4 w-full h-10 font-medium text-white bg-gradient-to-br from-black rounded-md group/btn to-neutral-600 shadow-input dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 cursor-pointer"
+            className="w-full mt-6 p-2.5 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             type="submit"
             disabled={loading}
           >
             {loading ? "Création en cours..." : "S'inscrire →"}
-            <BottomGradient />
           </button>
 
           <Link
             href="/auth/login"
-            className="flex justify-center items-center pt-4 text-sm text-neutral-700 dark:text-neutral-300 hover:underline"
+            className="flex justify-center items-center pt-4 text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
             prefetch={false}
           >
             Déjà un compte ? Connectez-vous
@@ -164,15 +199,6 @@ export const RegisterForm = () => {
         </form>
       </div>
     </div>
-  );
-};
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="block absolute inset-x-0 -bottom-px w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span className="block absolute -bottom-px inset-x-10 mx-auto w-1/2 h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-    </>
   );
 };
 

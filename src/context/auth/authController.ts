@@ -17,7 +17,7 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem("isLoggedIn");
     toast.success("Vous avez été déconnecté avec succès.", { duration: 3000 });
-    window.location.href = "/";
+    window.location.href = "/auth/login";
   };
 
   return { checkAuth, logout };

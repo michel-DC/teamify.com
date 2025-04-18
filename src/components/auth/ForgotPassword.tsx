@@ -1,97 +1,152 @@
 "use client";
 import React from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Label } from "../ui/label";
-import { Input } from "../ui/Input"; // Corrected casing
+import { Input } from "../ui/Input";
 import { cn } from "@/lib/utils";
 import {
   IconBrandGoogle,
   IconBrandApple,
   IconBrandFacebook,
 } from "@tabler/icons-react";
+import { Moon, Sun } from "lucide-react";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 export const ForgotPassword = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    } else {
+      const isDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setTheme(isDarkMode ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", isDarkMode);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Forgot password form submitted");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/API/auth/check-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        toast.success(
+          `Un email de réinitialisation a été envoyé à ${data.user.firstname}.`
+        );
+      } else {
+        toast.error("Cette adresse email n'est pas enregistrée.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la vérification de l'email:", error);
+      toast.error("Une erreur s'est produite. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="p-4 mx-auto w-full max-w-md bg-white border border-solid shadow-input md:rounded-2xl md:p-8 dark:bg-black">
-        <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+    <div className="flex justify-center items-center min-h-screen bg-background px-4 sm:px-6">
+      <Toaster position="top-center" richColors />
+      <button
+        onClick={toggleTheme}
+        className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200"
+        aria-label="Toggle theme"
+      >
+        {theme === "light" ? (
+          <Moon className="w-5 h-5 text-foreground" />
+        ) : (
+          <Sun className="w-5 h-5 text-foreground" />
+        )}
+      </button>
+      <div className="p-6 sm:p-8 mx-auto w-full max-w-md bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-lg sm:text-xl font-medium text-foreground">
           Réinitialiser votre mot de passe
         </h2>
-        <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="mt-2 text-sm sm:text-base text-muted-foreground">
           Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.
         </p>
-        <form className="my-8" onSubmit={handleSubmit}>
+        <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Adresse mail</Label>
-            <Input id="email" placeholder="email@gmail.com" type="email" />
+            <Input
+              id="email"
+              placeholder="email@gmail.com"
+              type="email"
+              className="bg-secondary"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </LabelInputContainer>
 
           <button
-            className="group/btn relative block h-10 mb-4 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] cursor-pointer"
+            className="w-full p-2.5 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit"
+            disabled={loading}
           >
-            Réinitialiser le mot de passe &rarr;
-            <BottomGradient />
+            {loading
+              ? "Vérification en cours..."
+              : "Reinitialiser mon mot de passe →"}
           </button>
           <Link
             href="/auth/login"
-            className="flex justify-center items-center pt-4 text-sm text-neutral-700 dark:text-neutral-300 hover:underline"
+            className="flex justify-center items-center pt-4 text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
             prefetch={false}
           >
-            Se connecter
+            Vous possedez déjà un compte ? Se connecter
           </Link>
 
-          <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
+          <div className="my-6 sm:my-8 h-[1px] w-full bg-border" />
 
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-3 sm:space-y-4">
             <button
-              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626] cursor-pointer"
+              className="w-full p-2 sm:p-2.5 bg-secondary text-secondary-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 flex items-center justify-center gap-2"
               type="button"
             >
-              <IconBrandGoogle className="w-4 h-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                Google
-              </span>
-              <BottomGradient />
+              <IconBrandGoogle className="w-4 h-4" />
+              <span>Google</span>
             </button>
             <button
-              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626] cursor-pointer"
+              className="w-full p-2 sm:p-2.5 bg-secondary text-secondary-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 flex items-center justify-center gap-2"
               type="button"
             >
-              <IconBrandApple className="w-4 h-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                Apple
-              </span>
-              <BottomGradient />
+              <IconBrandApple className="w-4 h-4" />
+              <span>Apple</span>
             </button>
             <button
-              className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626] cursor-pointer"
+              className="w-full p-2 sm:p-2.5 bg-secondary text-secondary-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 flex items-center justify-center gap-2"
               type="button"
             >
-              <IconBrandFacebook className="w-4 h-4 text-neutral-800 dark:text-neutral-300" />
-              <span className="text-sm text-neutral-700 dark:text-neutral-300">
-                Facebook
-              </span>
-              <BottomGradient />
+              <IconBrandFacebook className="w-4 h-4" />
+              <span>Facebook</span>
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
-};
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="block absolute inset-x-0 -bottom-px w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span className="block absolute -bottom-px inset-x-10 mx-auto w-1/2 h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
-    </>
   );
 };
 
