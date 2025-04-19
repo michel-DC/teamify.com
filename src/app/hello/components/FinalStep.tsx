@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { StepProps } from "../../../../types/steps";
+import Image from "next/image";
 
 export default function FinalStep({ formData }: StepProps) {
   const router = useRouter();
@@ -51,9 +52,12 @@ export default function FinalStep({ formData }: StepProps) {
           <strong className="font-medium">Mission :</strong> {formData.mission}
         </li>
         {formData.profileImage && (
-          <img
+          <Image
             src={formData.profileImage}
             className="w-32 h-32 rounded-lg object-cover border border-border"
+            alt="organisation-profile-picture"
+            width={128}
+            height={128}
           />
         )}
       </ul>

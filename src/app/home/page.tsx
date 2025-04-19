@@ -169,7 +169,8 @@ export const HomePage = () => {
                   <Image
                     src="/images/illustration/illustration-team.png"
                     alt="Équipe en collaboration"
-                    fill
+                    width={500}
+                    height={384}
                     className="object-cover"
                   />
                 </div>

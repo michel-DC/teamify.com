@@ -34,7 +34,8 @@ export default function AboutSection() {
             <Image
               src="/images/about/equipe-illustration.png"
               alt="Équipe en collaboration"
-              fill
+              width={500}
+              height={384}
               className="object-cover"
             />
           </div>

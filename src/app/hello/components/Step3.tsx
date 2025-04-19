@@ -1,6 +1,7 @@
 "use client";
 
 import { StepProps } from "../../../../types/steps";
+import Image from "next/image";
 
 export default function Step3({
   next,
@@ -36,10 +37,12 @@ export default function Step3({
         className="w-full p-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-secondary file:text-secondary-foreground hover:file:bg-secondary/80"
       />
       {formData.profileImage && (
-        <img
+        <Image
           src={formData.profileImage}
           alt="Preview"
           className="w-32 h-32 object-cover rounded-lg border border-border"
+          width={128}
+          height={128}
         />
       )}
       <div className="flex justify-between gap-4">
