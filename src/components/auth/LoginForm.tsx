@@ -51,37 +51,51 @@ export const LoginForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("../API/auth/login", {
+      const res = await fetch("../api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
-      const text = await res.text();
-      console.log("Raw response:", text);
-
       if (res.ok) {
-        const data = JSON.parse(text);
+        const data = await res.json();
         console.log("Login success:", data);
+
         localStorage.setItem("isLoggedIn", "true");
+
         toast.success(
           `Vous êtes maintenant connecté en tant que ${data.user.firstname}!`,
           {
             duration: 2500,
-            onAutoClose: () => {
-              router.push("/dashboard");
+            onAutoClose: async () => {
+              const userResponse = await fetch("/api/user/has-organization", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email: data.user.email }),
+              });
+
+              if (userResponse.ok) {
+                const userData = await userResponse.json();
+
+                if (userData.hasOrganization) {
+                  router.push("/dashboard");
+                } else {
+                  router.push("/hello");
+                }
+              } else {
+                router.push("/home");
+              }
             },
           }
         );
+
+        console.log("Redirection en cours...");
       } else {
-        try {
-          const data = JSON.parse(text);
-          setError(data.error || "Erreur lors de la connexion");
-          console.error("Login error:", data);
-        } catch (err) {
-          setError("Erreur serveur: réponse non valide");
-          console.error("Failed to parse error response:", text);
-        }
+        const errorData = await res.json();
+        setError(errorData.error || "Erreur lors de la connexion");
+        console.error("Login error:", errorData);
       }
     } catch (err) {
       setError("Erreur réseau");

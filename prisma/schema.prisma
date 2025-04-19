@@ -8,11 +8,34 @@ datasource db {
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
-  email        String    @unique
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
   password     String
-  firstname    String?   // Prénom de l'utilisateur
-  lastname     String?   // Nom de famille de l'utilisateur
+  firstname    String?
+  lastname     String?
+  createdAt    DateTime       @default(now())
 
-  createdAt    DateTime  @default(now())
+  organization Organization?  // Relation 1:1 (un utilisateur peut créer UNE organisation)
 }
+
+model Organization {
+  id            Int      @id @default(autoincrement())
+  name          String   // Nom de l'organisation (obligatoire)
+  bio           String?  // Description ou bio (facultatif)
+  profileImage  String?  // URL de la photo de profil (facultatif, stockée en string)
+  memberCount   Int      // Nombre de membres (obligatoire)
+  size          OrgSize  // Taille de l'organisation (enum: petite, moyenne, grande)
+  mission       String   // Ce que veut faire l'orga (obligatoire)
+
+  createdAt     DateTime @default(now())
+
+  owner         User     @relation(fields: [ownerId], references: [id])
+  ownerId       Int      @unique // Chaque user ne peut posséder qu'une seule orga
+}
+
+enum OrgSize {
+  PETITE
+  MOYENNE
+  GRANDE
+}
+

@@ -55,7 +55,7 @@ export const RegisterForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("../API/auth/register", {
+      const res = await fetch("../api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstname, lastname, email, password }),
@@ -66,7 +66,7 @@ export const RegisterForm = () => {
 
       if (res.ok) {
         const data = JSON.parse(text);
-        toast.success(`Bienvenue sur teamify ${lastname}`, {
+        toast.success(`Bienvenue sur teamify ${lastname} !`, {
           duration: 4000,
           onAutoClose: () => {
             router.push("/auth/login");
