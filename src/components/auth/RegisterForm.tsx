@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Sun, Moon } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export const RegisterForm = () => {
   const router = useRouter();
@@ -105,6 +107,13 @@ export const RegisterForm = () => {
       </button>
       <Toaster position="top-center" richColors />
       <div className="p-6 sm:p-8 w-full max-w-md bg-card rounded-lg border border-border shadow-sm">
+        <Link
+          href="/"
+          className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 mb-4"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4 mr-2" />
+          Retour à l'accueil
+        </Link>
         <h2 className="text-lg sm:text-xl font-medium text-foreground">
           Bienvenue sur Teamify
         </h2>
@@ -115,7 +124,7 @@ export const RegisterForm = () => {
         <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <LabelInputContainer>
-              <Label htmlFor="firstname">Nom</Label>
+              <Label htmlFor="firstname">Prénom</Label>
               <Input
                 id="firstname"
                 value={firstname}
@@ -127,7 +136,7 @@ export const RegisterForm = () => {
               />
             </LabelInputContainer>
             <LabelInputContainer>
-              <Label htmlFor="lastname">Prénom</Label>
+              <Label htmlFor="lastname">Nom</Label>
               <Input
                 id="lastname"
                 value={lastname}

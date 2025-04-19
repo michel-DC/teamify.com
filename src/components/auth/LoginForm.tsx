@@ -14,6 +14,8 @@ import {
   IconBrandApple,
   IconBrandFacebook,
 } from "@tabler/icons-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -121,6 +123,13 @@ export const LoginForm = () => {
 
       <Toaster position="top-center" richColors />
       <div className="p-6 sm:p-8 w-full max-w-md bg-card rounded-lg border border-border shadow-sm">
+        <Link
+          href="/"
+          className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 mb-4"
+        >
+          <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4 mr-2" />
+          Retour à l'accueil
+        </Link>
         <h2 className="text-lg sm:text-xl font-medium text-foreground">
           Vous revoilà
         </h2>
