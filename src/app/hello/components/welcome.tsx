@@ -1,9 +1,18 @@
 import { StepProps } from "../../../../types/steps";
 import Image from "next/image";
 
-export default function Welcome({ next, formData, setFormData }: StepProps) {
+export default function Welcome({
+  next,
+  prev,
+  formData,
+  setFormData,
+}: StepProps) {
   const handleNext = () => {
     if (next) next();
+  };
+
+  const handlePrev = () => {
+    if (prev) prev();
   };
 
   return (

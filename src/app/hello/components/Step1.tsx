@@ -2,9 +2,18 @@
 
 import { StepProps } from "../../../../types/steps";
 
-export default function Step1({ next, formData, setFormData }: StepProps) {
+export default function Step1({
+  next,
+  prev,
+  formData,
+  setFormData,
+}: StepProps) {
   const handleNext = () => {
     if (next) next();
+  };
+
+  const handlePrev = () => {
+    if (prev) prev();
   };
 
   return (
@@ -20,7 +29,13 @@ export default function Step1({ next, formData, setFormData }: StepProps) {
         placeholder="Ex: Les Étoiles Solidaires"
       />
       <button
-        onClick={next}
+        onClick={handlePrev}
+        className="px-4 py-2 text-sm font-medium text-foreground bg-secondary rounded-md hover:bg-secondary/80 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
+      >
+        Précedent
+      </button>
+      <button
+        onClick={handleNext}
         disabled={!formData.name}
         className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none"
       >

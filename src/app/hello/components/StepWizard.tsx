@@ -10,6 +10,7 @@ import Step5 from "./Step5";
 import Step6 from "./Step6";
 import FinalStep from "./FinalStep";
 import { Moon, Sun } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function StepWizard() {
   const [step, setStep] = useState(1);
@@ -21,9 +22,7 @@ export default function StepWizard() {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     } else {
-      const isDarkMode = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
+      const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
       setTheme(isDarkMode ? "dark" : "light");
       document.documentElement.classList.toggle("dark", isDarkMode);
     }
@@ -48,6 +47,29 @@ export default function StepWizard() {
   const next = () => setStep((s) => s + 1);
   const prev = () => setStep((s) => s - 1);
 
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <Welcome next={next} formData={formData} setFormData={setFormData} />;
+      case 2:
+        return <Step1 next={next} formData={formData} setFormData={setFormData} />;
+      case 3:
+        return <Step2 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+      case 4:
+        return <Step3 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+      case 5:
+        return <Step4 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+      case 6:
+        return <Step5 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+      case 7:
+        return <Step6 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+      case 8:
+        return <FinalStep formData={formData} setFormData={setFormData} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <button
@@ -61,58 +83,21 @@ export default function StepWizard() {
           <Sun className="w-5 h-5 text-foreground" />
         )}
       </button>
-      <div className="max-w-2xl w-full p-6 bg-card rounded-lg border border-border shadow-sm space-y-6">
+
+      <div className="max-w-2xl w-full p-6 bg-card rounded-lg border border-border shadow-sm space-y-6 overflow-hidden">
         <div className="text-muted-foreground text-sm">Étape {step} sur 8</div>
 
-        {step === 1 && (
-          <Welcome next={next} formData={formData} setFormData={setFormData} />
-        )}
-        {step === 2 && (
-          <Step1 next={next} formData={formData} setFormData={setFormData} />
-        )}
-        {step === 3 && (
-          <Step2
-            next={next}
-            prev={prev}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        )}
-        {step === 4 && (
-          <Step3
-            next={next}
-            prev={prev}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        )}
-        {step === 5 && (
-          <Step4
-            next={next}
-            prev={prev}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        )}
-        {step === 6 && (
-          <Step5
-            next={next}
-            prev={prev}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        )}
-        {step === 7 && (
-          <Step6
-            next={next}
-            prev={prev}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        )}
-        {step === 8 && (
-          <FinalStep formData={formData} setFormData={setFormData} />
-        )}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            {renderStep()}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
