@@ -81,6 +81,9 @@ export const LoginForm = () => {
               if (userResponse.ok) {
                 const userData = await userResponse.json();
 
+                document.cookie = "isLoggedIn=true; path=/";
+                document.cookie = `hasOrganization=${userData.hasOrganization}; path=/`;
+
                 if (userData.hasOrganization) {
                   router.push("/dashboard");
                 } else {

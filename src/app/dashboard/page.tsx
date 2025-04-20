@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth/authController";
 import { toast, Toaster } from "sonner";
 import { Button } from "@/components/ui/Button";
+import { useOrganization } from "@/hooks/useOrganization";
 
 const Dashboard = () => {
   const router = useRouter();
   const { checkAuth, logout } = useAuth();
+  const { organization, loading } = useOrganization();
 
   useEffect(() => {
     if (!checkAuth()) {
@@ -24,9 +26,23 @@ const Dashboard = () => {
     }
   }, [checkAuth, router]);
 
+  useEffect(() => {
+    if (!loading && !organization) {
+      toast.error(
+        `Vous devez créer une organisation pour accéder au tableau de bord.`,
+        {
+          duration: 2500,
+          onAutoClose: () => {
+            router.push("/hello");
+          },
+        }
+      );
+    }
+  }, [organization, loading, router]);
+
   const handleLogout = () => {
     logout();
-    router.push("/");
+    router.push("/auth/login");
   };
 
   return (
