@@ -2,8 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Label } from "@/components/ui/label";
+import Image from "next/image";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -111,10 +114,10 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-background px-4 sm:px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
       <button
         onClick={toggleTheme}
-        className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200"
+        className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200 shadow-lg"
         aria-label="Toggle theme"
       >
         {theme === "light" ? (
@@ -125,107 +128,120 @@ export const LoginForm = () => {
       </button>
 
       <Toaster position="top-center" richColors />
-      <div className="p-6 sm:p-8 w-full max-w-md bg-card rounded-lg border border-border shadow-sm">
-        <Link
-          href="/"
-          className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 mb-4"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4 mr-2" />
-          Retour à l'accueil
-        </Link>
-        <h2 className="text-lg sm:text-xl font-medium text-foreground">
-          Vous revoilà
-        </h2>
-        <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-          Connectez-vous pour accéder à votre espace et créer votre évènement
-        </p>
-
-        <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="email">Adresse mail</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="email@gmail.com"
-              required
-              className="bg-secondary"
+      <Card className="w-full max-w-4xl shadow-xl">
+        <CardContent className="grid p-0 md:grid-cols-2">
+          <form className="p-8" onSubmit={handleSubmit}>
+            <div className="space-y-6">
+              <Link
+                href="/"
+                className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200"
+              >
+                <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4 mr-2" />
+                Retour à l'accueil
+              </Link>
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold text-center">Vous revoilà</h1>
+                <p className="text-muted-foreground text-center">
+                  Connectez-vous pour accéder à votre espace et créer votre
+                  évènement
+                </p>
+              </div>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Adresse mail</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="email@gmail.com"
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="password">Mot de passe</Label>
+                    <Link
+                      href="/auth/forgot"
+                      className="ml-auto text-sm underline-offset-2 hover:underline"
+                      prefetch={false}
+                    >
+                      Mot de passe oublié ?
+                    </Link>
+                  </div>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              {error && (
+                <p className="text-sm text-center text-destructive">{error}</p>
+              )}
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Connexion en cours..." : "Se connecter"}
+              </Button>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Ou continuez avec
+                  </span>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <Button variant="outline" type="button" className="w-full">
+                  <IconBrandGoogle className="w-4 h-4 mr-2" />
+                  <span>Google</span>
+                </Button>
+                <Button variant="outline" type="button" className="w-full">
+                  <IconBrandApple className="w-4 h-4 mr-2" />
+                  <span>Apple</span>
+                </Button>
+                <Button variant="outline" type="button" className="w-full">
+                  <IconBrandFacebook className="w-4 h-4 mr-2" />
+                  <span>Facebook</span>
+                </Button>
+              </div>
+              <div className="text-center text-sm">
+                Pas encore de compte ?{" "}
+                <Link
+                  href="/auth/register"
+                  className="font-medium underline underline-offset-4 hover:text-primary"
+                  prefetch={false}
+                >
+                  Créer en un
+                </Link>
+              </div>
+            </div>
+          </form>
+          <div className="hidden md:block relative bg-gradient-to-br from-primary/10 to-secondary/10">
+            <div className="absolute inset-0 bg-background/50" />
+            <Image
+              alt="login-page-image-illus"
+              src="/images/svg/auth-1.svg"
+              width={200}
+              height={200}
+              className="absolute inset-0 h-full w-full object-cover"
+              priority
             />
-          </LabelInputContainer>
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="password">Mot de passe</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              className="bg-secondary"
-            />
-          </LabelInputContainer>
-          {error && (
-            <p className="mb-4 text-sm text-center text-destructive">{error}</p>
-          )}
-          <button
-            className="w-full p-2.5 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? "Connexion en cours..." : "Se connecter →"}
-          </button>
-          <Link
-            href="/auth/forgot"
-            className="flex justify-center items-center pt-4 text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
-            prefetch={false}
-          >
-            Mot de passe oublié ?
-          </Link>
-          <Link
-            href="/auth/register"
-            className="flex justify-center items-center pt-4 mt-4 mb-4 text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
-            prefetch={false}
-          >
-            Pas encore de compte ? Créer en un
-          </Link>
-
-          <div className="flex flex-col space-y-4">
-            <button
-              className="w-full p-2.5 bg-secondary text-secondary-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 flex items-center justify-center gap-2"
-              type="button"
-            >
-              <IconBrandGoogle className="w-4 h-4" />
-              <span>Google</span>
-            </button>
-            <button
-              className="w-full p-2.5 bg-secondary text-secondary-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 flex items-center justify-center gap-2"
-              type="button"
-            >
-              <IconBrandApple className="w-4 h-4" />
-              <span>Apple</span>
-            </button>
-            <button
-              className="w-full p-2.5 bg-secondary text-secondary-foreground rounded-md font-medium hover:bg-accent transition-all duration-200 flex items-center justify-center gap-2"
-              type="button"
-            >
-              <IconBrandFacebook className="w-4 h-4" />
-              <span>Facebook</span>
-            </button>
           </div>
-        </form>
+        </CardContent>
+      </Card>
+      <div className="fixed bottom-4 text-muted-foreground text-center text-xs">
+        En cliquant sur continuer, vous acceptez nos{" "}
+        <a href="#" className="underline hover:text-primary">
+          Conditions d'utilisation
+        </a>{" "}
+        et <a href="#">Politique de confidentialité</a>.
       </div>
-    </div>
-  );
-};
-
-const LabelInputContainer: React.FC<{
-  children: React.ReactNode;
-  className?: string;
-}> = ({ children, className }) => {
-  return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
     </div>
   );
 };

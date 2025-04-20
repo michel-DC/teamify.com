@@ -2,8 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
 import { Label } from "../ui/label";
-import { Input } from "../ui/Input";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
@@ -93,10 +96,10 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-background px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
       <button
         onClick={toggleTheme}
-        className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200"
+        className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200 shadow-lg"
         aria-label="Toggle theme"
       >
         {theme === "light" ? (
@@ -105,119 +108,124 @@ export const RegisterForm = () => {
           <Sun className="w-5 h-5 text-foreground" />
         )}
       </button>
+
       <Toaster position="top-center" richColors />
-      <div className="p-6 sm:p-8 w-full max-w-md bg-card rounded-lg border border-border shadow-sm">
-        <Link
-          href="/"
-          className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 mb-4"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4 mr-2" />
-          Retour à l'accueil
-        </Link>
-        <h2 className="text-lg sm:text-xl font-medium text-foreground">
-          Bienvenue sur Teamify
-        </h2>
-        <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-          Inscrivez-vous pour accéder à votre espace et créer votre évènement
-        </p>
-
-        <form className="mt-6 sm:mt-8" onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            <LabelInputContainer>
-              <Label htmlFor="firstname">Prénom</Label>
-              <Input
-                id="firstname"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-                placeholder="Tyler"
-                type="text"
-                required
-                className="bg-secondary"
-              />
-            </LabelInputContainer>
-            <LabelInputContainer>
-              <Label htmlFor="lastname">Nom</Label>
-              <Input
-                id="lastname"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                placeholder="Durden"
-                type="text"
-                className="bg-secondary"
-              />
-            </LabelInputContainer>
-            <LabelInputContainer>
-              <Label htmlFor="email">Adresse mail</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="email@gmail.com"
-                required
-                className="bg-secondary"
-              />
-            </LabelInputContainer>
-            <LabelInputContainer>
-              <Label htmlFor="password">Mot de passe</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="bg-secondary"
-              />
-            </LabelInputContainer>
-            <LabelInputContainer>
-              <Label htmlFor="confirmpassword">
-                Confirmez votre mot de passe
-              </Label>
-              <Input
-                id="confirmpassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="bg-secondary"
-              />
-            </LabelInputContainer>
+      <Card className="w-full max-w-4xl shadow-xl">
+        <CardContent className="grid p-0 md:grid-cols-2">
+          <div className="hidden md:block relative bg-gradient-to-br from-primary/10 to-secondary/10">
+            <div className="absolute inset-0 bg-background/50" />
+            <Image
+              alt="register-page-image-illus"
+              src="/images/svg/auth.svg"
+              width={400}
+              height={400}
+              className="absolute inset-0 h-full w-full object-contain"
+              priority
+            />
           </div>
-
-          {error && (
-            <p className="mt-4 text-sm text-center text-destructive">{error}</p>
-          )}
-
-          <button
-            className="w-full mt-6 p-2.5 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? "Création en cours..." : "S'inscrire →"}
-          </button>
-
-          <Link
-            href="/auth/login"
-            className="flex justify-center items-center pt-4 text-sm text-muted-foreground hover:text-foreground transition-all duration-200"
-            prefetch={false}
-          >
-            Déjà un compte ? Connectez-vous
-          </Link>
-        </form>
+          <form className="p-8" onSubmit={handleSubmit}>
+            <div className="space-y-6">
+              <Link
+                href="/"
+                className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200"
+              >
+                <FontAwesomeIcon icon={faArrowLeft} className="w-4 h-4 mr-2" />
+                Retour à l'accueil
+              </Link>
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold text-center">Bienvenue</h1>
+                <p className="text-muted-foreground text-center">
+                  Inscrivez-vous pour accéder à votre espace et créer votre
+                  évènement
+                </p>
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstname">Prénom</Label>
+                    <Input
+                      id="firstname"
+                      value={firstname}
+                      onChange={(e) => setFirstname(e.target.value)}
+                      placeholder="Tyler"
+                      type="text"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastname">Nom</Label>
+                    <Input
+                      id="lastname"
+                      value={lastname}
+                      onChange={(e) => setLastname(e.target.value)}
+                      placeholder="Durden"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Adresse mail</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="email@gmail.com"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Mot de passe</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="confirmpassword">
+                    Confirmez votre mot de passe
+                  </Label>
+                  <Input
+                    id="confirmpassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+              </div>
+              {error && (
+                <p className="text-sm text-center text-destructive">{error}</p>
+              )}
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Création en cours..." : "S'inscrire"}
+              </Button>
+              <div className="text-center text-sm">
+                Déjà un compte ?{" "}
+                <Link
+                  href="/auth/login"
+                  className="font-medium underline underline-offset-4 hover:text-primary"
+                  prefetch={false}
+                >
+                  Connectez-vous
+                </Link>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+      <div className="fixed bottom-4 text-muted-foreground text-center text-xs">
+        En cliquant sur continuer, vous acceptez nos{" "}
+        <a href="#" className="underline hover:text-primary">
+          Conditions d'utilisation
+        </a>{" "}
+        et <a href="#">Politique de confidentialité</a>.
       </div>
-    </div>
-  );
-};
-
-const LabelInputContainer: React.FC<{
-  children: React.ReactNode;
-  className?: string;
-}> = ({ children, className }) => {
-  return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
     </div>
   );
 };
