@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "../styles/globals.css";
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"], // Add common weights you might need
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -22,12 +22,12 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} h-full bg-background text-foreground`}
+      className={`${spaceGrotesk.variable} h-full bg-background text-foreground`}
     >
       <head>
         <link rel="icon" href="/images/logo/favicon.png" type="image/x-icon" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={spaceGrotesk.className}>{children}</body>
     </html>
   );
 }

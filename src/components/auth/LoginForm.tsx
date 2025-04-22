@@ -226,10 +226,10 @@ export const LoginForm = () => {
             <div className="absolute inset-0 bg-background/50" />
             <Image
               alt="login-page-image-illus"
-              src="/images/svg/auth-1.svg"
-              width={200}
-              height={200}
-              className="absolute inset-0 h-full w-full object-cover"
+              src="/images/svg/auth.svg"
+              width={600}
+              height={600}
+              className="absolute inset-0 h-full w-full object-contain"
               priority
             />
           </div>

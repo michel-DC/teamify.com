@@ -22,7 +22,9 @@ export default function StepWizard() {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     } else {
-      const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const isDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
       setTheme(isDarkMode ? "dark" : "light");
       document.documentElement.classList.toggle("dark", isDarkMode);
     }
@@ -50,19 +52,63 @@ export default function StepWizard() {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <Welcome next={next} formData={formData} setFormData={setFormData} />;
+        return (
+          <Welcome next={next} formData={formData} setFormData={setFormData} />
+        );
       case 2:
-        return <Step1 next={next} formData={formData} setFormData={setFormData} />;
+        return (
+          <Step1
+            next={next}
+            prev={prev}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 3:
-        return <Step2 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+        return (
+          <Step2
+            next={next}
+            prev={prev}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 4:
-        return <Step3 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+        return (
+          <Step3
+            next={next}
+            prev={prev}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 5:
-        return <Step4 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+        return (
+          <Step4
+            next={next}
+            prev={prev}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 6:
-        return <Step5 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+        return (
+          <Step5
+            next={next}
+            prev={prev}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 7:
-        return <Step6 next={next} prev={prev} formData={formData} setFormData={setFormData} />;
+        return (
+          <Step6
+            next={next}
+            prev={prev}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 8:
         return <FinalStep formData={formData} setFormData={setFormData} />;
       default:
