@@ -174,6 +174,7 @@ export const LoginForm = () => {
                     id="password"
                     type="password"
                     value={password}
+                    placeholder="••••••••"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     className="w-full"

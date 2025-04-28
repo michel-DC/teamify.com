@@ -6,7 +6,7 @@ type Organization = {
   id: number;
   name: string;
   bio?: string;
-  profileImage?: string;
+  profileImage: string;
   memberCount: number;
   size: "PETITE" | "MOYENNE" | "GRANDE";
   mission: string;

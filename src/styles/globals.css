@@ -192,21 +192,20 @@
   }
 }
 
-/* Custom Scrollbar Styles */
+/* Minimalist Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-muted);
-  border-radius: 10px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 10px;
+  background: var(--color-muted);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-foreground);
+  background: var(--color-muted-foreground);
 }
