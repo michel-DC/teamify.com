@@ -1,15 +1,17 @@
 // lib/auth.ts
+"use server";
+
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { prisma } from "./prisma";
 
 const JWT_SECRET = process.env.JWT_SECRET || "dev_secret_key";
 
-export function generateToken(userId: number) {
+export async function generateToken(userId: number) {
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: "7d" });
 }
 
-export function verifyToken(token: string): { userId: number } | null {
+export async function verifyToken(token: string): Promise<{ userId: number } | null> {
   try {
     return jwt.verify(token, JWT_SECRET) as { userId: number };
   } catch {
@@ -18,12 +20,12 @@ export function verifyToken(token: string): { userId: number } | null {
 }
 
 export async function getCurrentUser() {
-  const cookieStore = await cookies(); // ← important: await ici
+  const cookieStore = cookies(); // ← pas de await ici
   const token = cookieStore.get("token")?.value;
 
   if (!token) return null;
 
-  const payload = verifyToken(token);
+  const payload = await verifyToken(token);
   if (!payload?.userId) return null;
 
   const user = await prisma.user.findUnique({
@@ -32,14 +34,3 @@ export async function getCurrentUser() {
 
   return user;
 }
-
-export const authOptions = {
-  secret: process.env.JWT_SECRET,
-  cookieName: "token",
-  cookieOptions: {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/",
-  },
-};

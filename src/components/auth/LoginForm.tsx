@@ -56,7 +56,7 @@ export const LoginForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("../api/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -100,6 +100,13 @@ export const LoginForm = () => {
         );
 
         console.log("Redirection en cours...");
+      }
+      if (res.status === 500) {
+        const errorText = await res.text();
+        console.log("Erreur 500 détails:", errorText);
+        setError("Erreur serveur (500). Veuillez contacter le support.");
+        setLoading(false);
+        return;
       } else {
         const errorData = await res.json();
         setError(errorData.error || "Erreur lors de la connexion");
