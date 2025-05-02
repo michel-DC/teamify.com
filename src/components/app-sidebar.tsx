@@ -29,7 +29,14 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 
 // This is sample data.
-const { user } = await getCurrentUser();
+const currentUser = await getCurrentUser();
+
+if (!currentUser) {
+  throw new Error("User not authenticated");
+}
+
+const user = currentUser;
+
 const organization = await prisma.organization.findUnique({
   where: {
     ownerId: user.id,

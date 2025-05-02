@@ -54,20 +54,21 @@ export const LoginForm = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
+  
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("../api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+  
+      const data = await res.json(); // 🟢 appelé une seule fois ici
+  
       if (res.ok) {
-        const data = await res.json();
         console.log("Login success:", data);
-
+  
         localStorage.setItem("isLoggedIn", "true");
-
+  
         toast.success(
           `Vous êtes maintenant connecté en tant que ${data.user.firstname}!`,
           {
@@ -80,37 +81,30 @@ export const LoginForm = () => {
                 },
                 body: JSON.stringify({ email: data.user.email }),
               });
-
-              if (userResponse.ok) {
-                const userData = await userResponse.json();
-
-                document.cookie = "isLoggedIn=true; path=/";
-                document.cookie = `hasOrganization=${userData.hasOrganization}; path=/`;
-
-                if (userData.hasOrganization) {
-                  router.push("/dashboard");
-                } else {
-                  router.push("/hello");
-                }
+  
+              const userData = await userResponse.json(); // 🟢 une seule fois ici aussi
+  
+              document.cookie = "isLoggedIn=true; path=/";
+              document.cookie = `hasOrganization=${userData.hasOrganization}; path=/`;
+  
+              if (userData.hasOrganization) {
+                router.push("/dashboard");
               } else {
-                router.push("/home");
+                router.push("/hello");
               }
             },
           }
         );
-
+  
         console.log("Redirection en cours...");
-      }
-      if (res.status === 500) {
-        const errorText = await res.text();
-        console.log("Erreur 500 détails:", errorText);
-        setError("Erreur serveur (500). Veuillez contacter le support.");
-        setLoading(false);
-        return;
       } else {
-        const errorData = await res.json();
-        setError(errorData.error || "Erreur lors de la connexion");
-        console.error("Login error:", errorData);
+        if (res.status === 500) {
+          console.log("Erreur 500 détails:", data);
+          setError("Erreur serveur (500). Veuillez contacter le support.");
+        } else {
+          setError(data.error || "Erreur lors de la connexion");
+          console.error("Login error:", data);
+        }
       }
     } catch (err) {
       setError("Erreur réseau");
@@ -119,10 +113,11 @@ export const LoginForm = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-      <button
+      <Button
         onClick={toggleTheme}
         className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200 shadow-lg"
         aria-label="Toggle theme"
@@ -132,7 +127,7 @@ export const LoginForm = () => {
         ) : (
           <Sun className="w-5 h-5 text-foreground" />
         )}
-      </button>
+      </Button>
 
       <Toaster position="top-center" richColors />
       <Card className="w-full max-w-4xl shadow-xl">
