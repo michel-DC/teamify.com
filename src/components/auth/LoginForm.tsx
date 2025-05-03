@@ -54,21 +54,21 @@ export const LoginForm = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-  
+
     try {
       const res = await fetch("../api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
-      const data = await res.json(); // 🟢 appelé une seule fois ici
-  
+
+      const data = await res.json();
+
       if (res.ok) {
         console.log("Login success:", data);
-  
+
         localStorage.setItem("isLoggedIn", "true");
-  
+
         toast.success(
           `Vous êtes maintenant connecté en tant que ${data.user.firstname}!`,
           {
@@ -81,12 +81,12 @@ export const LoginForm = () => {
                 },
                 body: JSON.stringify({ email: data.user.email }),
               });
-  
-              const userData = await userResponse.json(); // 🟢 une seule fois ici aussi
-  
+
+              const userData = await userResponse.json();
+
               document.cookie = "isLoggedIn=true; path=/";
               document.cookie = `hasOrganization=${userData.hasOrganization}; path=/`;
-  
+
               if (userData.hasOrganization) {
                 router.push("/dashboard");
               } else {
@@ -95,7 +95,7 @@ export const LoginForm = () => {
             },
           }
         );
-  
+
         console.log("Redirection en cours...");
       } else {
         if (res.status === 500) {
@@ -113,10 +113,9 @@ export const LoginForm = () => {
       setLoading(false);
     }
   };
-  
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Button
         onClick={toggleTheme}
         className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200 shadow-lg"

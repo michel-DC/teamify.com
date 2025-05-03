@@ -12,10 +12,12 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
+  Calendar,
+  Users,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
+import { NavEvents } from "@/components/nav-events";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
 import {
@@ -25,125 +27,133 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth";
-
-// This is sample data.
-const currentUser = await getCurrentUser();
-
-if (!currentUser) {
-  throw new Error("User not authenticated");
-}
-
-const user = currentUser;
-
-const organization = await prisma.organization.findUnique({
-  where: {
-    ownerId: user.id,
-  },
-});
 
 const data = {
   user: {
-    name: user.name || "User",
-    email: user.email,
-    avatar: user.image || "",
+    name: "",
+    email: "",
+    avatar: "",
   },
   teams: [
     {
-      name: organization?.name || "My Organization",
+      name: "",
       logo: GalleryVerticalEnd,
-      plan: organization?.plan || "Free",
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Tableau de bord",
+      url: "/dashboard",
+      icon: PieChart,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Vue d'ensemble",
+          url: "/dashboard/overview",
         },
         {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          title: "Statistiques",
+          url: "/dashboard/stats",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      title: "Événements",
+      url: "/events",
+      icon: Calendar,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Tous les événements",
+          url: "/events",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Créer un événement",
+          url: "/events/new",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Mes invitations",
+          url: "/events/invitations",
         },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      title: "Organisations",
+      url: "/organizations",
+      icon: GalleryVerticalEnd,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "Mes organisations",
+          url: "/organizations",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Créer une organisation",
+          url: "/organizations/new",
         },
         {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Inviter un membre",
+          url: "/organizations/invite",
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
+      title: "Équipes",
+      url: "/teams",
+      icon: Users,
+      items: [
+        {
+          title: "Toutes les équipes",
+          url: "/teams",
+        },
+        {
+          title: "Créer une équipe",
+          url: "/teams/new",
+        },
+        {
+          title: "Gérer les membres",
+          url: "/teams/members",
+        },
+      ],
+    },
+    {
+      title: "Messages",
+      url: "/messages",
+      icon: Command,
+      items: [
+        {
+          title: "Discussions",
+          url: "/messages",
+        },
+        {
+          title: "Nouveau message",
+          url: "/messages/new",
+        },
+      ],
+    },
+    {
+      title: "Paramètres",
+      url: "/settings",
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Profil",
+          url: "/settings/profile",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "Notifications",
+          url: "/settings/notifications",
         },
         {
-          title: "Billing",
-          url: "#",
+          title: "Sécurité",
+          url: "/settings/security",
         },
         {
-          title: "Limits",
-          url: "#",
+          title: "Facturation",
+          url: "/settings/billing",
         },
       ],
     },
   ],
-  projects: [
+  events: [
     {
       name: "Design Engineering",
       url: "#",
@@ -163,17 +173,51 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [userData, setUserData] = React.useState(data);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/dashboard");
+        const dashboardData = await res.json();
+
+        if (dashboardData && dashboardData[0]) {
+          const user = dashboardData[0];
+          setUserData((prev) => ({
+            ...prev,
+            user: {
+              name: user.name,
+              email: user.email,
+              avatar: user.profilePicture || "",
+            },
+            teams: [
+              {
+                name: user.organization?.name || "My Organization",
+                logo: GalleryVerticalEnd,
+                plan: "Free",
+              },
+            ],
+          }));
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={userData.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={userData.navMain} />
+        <NavEvents events={userData.events} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

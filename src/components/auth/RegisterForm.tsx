@@ -96,7 +96,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <button
         onClick={toggleTheme}
         className="fixed top-4 right-4 p-2 rounded-full bg-card hover:bg-accent transition-colors duration-200 shadow-lg"
