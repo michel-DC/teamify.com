@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronsUpDown, Plus } from "lucide-react";
+import { ChevronsUpDown, GalleryVerticalEnd, Plus } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -68,7 +68,17 @@ export function TeamSwitcher({
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-md border">
-                  <team.logo className="size-3.5 shrink-0" />
+                  {typeof team.logo === "function" ? (
+                    <team.logo className="h-6 w-6" />
+                  ) : typeof team.logo === "string" ? (
+                    <img
+                      src={team.logo}
+                      alt={team.name}
+                      className="h-6 w-6 rounded-full"
+                    />
+                  ) : (
+                    <GalleryVerticalEnd className="h-6 w-6" />
+                  )}
                 </div>
                 {team.name}
                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>

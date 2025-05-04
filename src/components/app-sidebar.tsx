@@ -37,7 +37,7 @@ const data = {
   teams: [
     {
       name: "",
-      logo: GalleryVerticalEnd,
+      profileImage: GalleryVerticalEnd,
     },
   ],
   navMain: [
@@ -192,15 +192,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             },
             teams: [
               {
-                name: user.organization?.name || "My Organization",
-                logo: GalleryVerticalEnd,
-                plan: "Free",
+                name: user.organization?.name,
+                profileImage: GalleryVerticalEnd,
               },
             ],
           }));
         }
       } catch (error) {
-        console.error("Failed to fetch dashboard data", error);
+        console.error(
+          "Impossible de fetch les données, ressayer plus tard.",
+          error
+        );
       }
     };
 
@@ -210,7 +212,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={userData.teams} />
+        <TeamSwitcher
+          teams={[
+            {
+              name: userData.teams[0].name,
+              logo: userData.teams[0].profileImage,
+            },
+          ]}
+        />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={userData.navMain} />
