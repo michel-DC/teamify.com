@@ -9,29 +9,31 @@ datasource db {
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
-  email        String         @unique
-  password     String
-  firstname    String?
-  lastname     String?
-  createdAt    DateTime       @default(now())
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  firstname String?
+  lastname  String?
+  createdAt DateTime @default(now())
 
-  organization Organization?  // Relation 1:1 (un utilisateur peut créer UNE organisation)
+  organization Organization? // Relation 1:1 (un utilisateur peut créer UNE organisation)
 }
 
 model Organization {
-  id            Int      @id @default(autoincrement())
-  name          String   // Nom de l'organisation (obligatoire)
-  bio           String?  // Description ou bio (facultatif)
-  profileImage  String?  // URL de la photo de profil (facultatif, stockée en string)
-  memberCount   Int      // Nombre de membres (obligatoire)
-  size          OrgSize  // Taille de l'organisation (enum: petite, moyenne, grande)
-  mission       String   // Ce que veut faire l'orga (obligatoire)
+  id           Int     @id @default(autoincrement())
+  name         String // Nom de l'organisation (obligatoire)
+  bio          String? // Description ou bio (facultatif)
+  profileImage String? // URL de la photo de profil (facultatif, stockée en string)
+  memberCount  Int // Nombre de membres (obligatoire)
+  size         OrgSize // Taille de l'organisation (enum: petite, moyenne, grande)
+  mission      String // Ce que veut faire l'orga (obligatoire)
 
-  createdAt     DateTime @default(now())
+  createdAt DateTime @default(now())
 
-  owner         User     @relation(fields: [ownerId], references: [id])
-  ownerId       Int      @unique // Chaque user ne peut posséder qu'une seule orga
+  owner   User @relation(fields: [ownerId], references: [id])
+  ownerId Int  @unique // Chaque user ne peut posséder qu'une seule orga
+
+  events Event[]
 }
 
 enum OrgSize {
@@ -40,3 +42,49 @@ enum OrgSize {
   GRANDE
 }
 
+model Event {
+  id          Int         @id @default(autoincrement())
+  title       String // Titre de l'événement
+  description String? // Description détaillée de l'événement
+  date        DateTime // Date et heure de l'événement
+  location    String // Lieu de l'événement
+  imageUrl    String? // Image de couverture de l'événement
+  capacity    Int // Nombre maximum de participants
+  status      EventStatus @default(DRAFT) // Statut de l'événement
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  organization Organization @relation(fields: [orgId], references: [id])
+  orgId        Int
+
+  // Autres champs utiles
+  budget      Float? // Budget de l'événement
+  category    EventCategory @default(REUNION) // Catégorie de l'événement
+  isPublic    Boolean       @default(true) // Événement public ou privé
+  isCancelled Boolean       @default(false) // Si l'événement est annulé
+}
+
+enum EventStatus {
+  DRAFT // En cours de création
+  PUBLISHED // Publié et visible
+  COMPLETED // Événement terminé
+  CANCELLED // Événement annulé
+}
+
+enum EventCategory {
+  REUNION
+  SEMINAIRE
+  FÊTE
+  CONFERENCE
+  FORMATION
+  ATELIER
+  NETWORKING
+  CEREMONIE
+  EXPOSITION
+  CONCERT
+  SPECTACLE
+  AUTRE
+}
