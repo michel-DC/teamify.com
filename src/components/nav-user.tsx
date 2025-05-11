@@ -32,6 +32,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/Button";
+import { toast } from "sonner";
+import router, { redirect } from "next/navigation";
 
 export function NavUser({
   user,
@@ -65,6 +67,22 @@ export function NavUser({
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
+
+  const handleLogOut = () => {
+    // Clear authentication cookies and local storage
+    document.cookie =
+      "isLoggedIn=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie =
+      "hasOrganization=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    localStorage.removeItem("isLoggedIn");
+    console.log("yes ça work");
+    toast.success(`Vous êtes bien déconnecté ${user.name}`, {
+      duration: 2000,
+      onAutoClose: () => {
+        redirect("/auth/login");
+      },
+    });
   };
 
   return (
@@ -130,7 +148,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Me deconnecter
+              <Button onClick={handleLogOut}>Me deconnecter</Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

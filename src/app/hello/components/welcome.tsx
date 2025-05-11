@@ -1,6 +1,8 @@
 import { useRouter } from "next/navigation";
 import { StepProps } from "../../../../types/steps";
 import Image from "next/image";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function Welcome({
   next,
@@ -14,6 +16,15 @@ export default function Welcome({
 
   const handlePrev = () => {
     if (prev) prev();
+  };
+
+  const handleExit = () => {
+    toast.error("Création d'organisation annulée", {
+      duration: 1500,
+      onAutoClose: () => {
+        router.push("/auth/login");
+      },
+    });
   };
 
   const router = useRouter();
@@ -47,7 +58,7 @@ export default function Welcome({
         Créer mon organisation
       </button>
       <button
-        onClick={() => router.push("/auth/login")}
+        onClick={handleExit}
         className="w-full sm:w-auto mt-4 sm:mt-0 sm:ml-64 px-4 sm:px-6 py-2 sm:py-3 text-base sm:text-lg font-medium text-secondary-foreground bg-secondary rounded-lg hover:bg-secondary/80 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         Annuler

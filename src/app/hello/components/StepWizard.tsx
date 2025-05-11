@@ -11,10 +11,15 @@ import Step6 from "./Step6";
 import FinalStep from "./FinalStep";
 import { Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast, Toaster } from "sonner";
+import { useOrganization } from "@/hooks/useOrganization";
+import router, { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function StepWizard() {
   const [step, setStep] = useState(1);
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const { organization, loading } = useOrganization();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
@@ -29,6 +34,20 @@ export default function StepWizard() {
       document.documentElement.classList.toggle("dark", isDarkMode);
     }
   }, []);
+
+  useEffect(() => {
+    if (organization) {
+      toast.error(
+        `Vous possédez déjà une organisation, rendez-vous sur le dashboard.`,
+        {
+          duration: 2000,
+          onAutoClose: () => {
+            redirect("/dashboard");
+          },
+        }
+      );
+    }
+  }, [organization, loading, router]);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -53,7 +72,14 @@ export default function StepWizard() {
     switch (step) {
       case 1:
         return (
-          <Welcome next={next} formData={formData} setFormData={setFormData} />
+          <div>
+            <Toaster position="top-center" richColors />
+            <Welcome
+              next={next}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          </div>
         );
       case 2:
         return (
