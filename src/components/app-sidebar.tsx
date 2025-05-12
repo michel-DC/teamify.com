@@ -37,7 +37,7 @@ const data = {
   teams: [
     {
       name: "",
-      profileImage: GalleryVerticalEnd,
+      profileImage: "",
     },
   ],
   navMain: [
@@ -49,7 +49,7 @@ const data = {
       items: [
         {
           title: "Vue d'ensemble",
-          url: "/dashboard/overview",
+          url: "#",
         },
         {
           title: "Statistiques",
@@ -193,7 +193,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             teams: [
               {
                 name: user.organization?.name,
-                profileImage: GalleryVerticalEnd,
+                profileImage: user.organization?.profileImage || "",
               },
             ],
           }));
@@ -213,12 +213,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher
-          teams={[
-            {
-              name: userData.teams[0].name,
-              logo: userData.teams[0].profileImage,
-            },
-          ]}
+          teams={userData.teams.map((team) => ({
+            name: team.name,
+            logo: () => <img src={team.profileImage} alt={team.name} />,
+          }))}
         />
       </SidebarHeader>
       <SidebarContent>

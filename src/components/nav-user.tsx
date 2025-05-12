@@ -62,7 +62,7 @@ export function NavUser({
     }
   }, []);
 
-  const toggleTheme = () => {
+  const handleThemeChange = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
@@ -142,13 +142,17 @@ export function NavUser({
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <SunMoon />
-                Changer de thème
+                <a href="#" onClick={handleThemeChange} className="">
+                  Changer de thème
+                </a>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              <Button onClick={handleLogOut}>Me deconnecter</Button>
+              <a href="#" onClick={handleLogOut} className="">
+                Me deconnecter
+              </a>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

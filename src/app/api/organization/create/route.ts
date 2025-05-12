@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         memberCount: Number(memberCount),
         size,
         mission,
-        owner: { connect: { id: user.id } }, // 🔗 relie à l'utilisateur connecté
+        owner: { connect: { id: user.id } },
       },
     });
 

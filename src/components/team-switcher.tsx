@@ -90,7 +90,9 @@ export function TeamSwitcher({
                 <Plus className="size-4" />
               </div>
               <div className="text-muted-foreground font-medium">
-                Ajouter une organisation
+                <a href="dahsboard/organizations/new">
+                  Ajouter une organisation
+                </a>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
