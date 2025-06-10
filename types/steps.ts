@@ -1,5 +1,3 @@
-// types/steps.ts
-
 export interface StepProps {
   next?: () => void;
   prev?: () => void;

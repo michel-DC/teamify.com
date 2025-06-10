@@ -24,7 +24,6 @@ export default function Step3({
       setFormData({ ...formData, profileImage: url }); // temporairement, à remplacer par Cloudinary plus tard
     }
   };
-
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold text-foreground">

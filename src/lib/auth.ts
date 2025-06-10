@@ -11,7 +11,9 @@ export async function generateToken(userId: number) {
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: "7d" });
 }
 
-export async function verifyToken(token: string): Promise<{ userId: number } | null> {
+export async function verifyToken(
+  token: string
+): Promise<{ userId: number } | null> {
   try {
     return jwt.verify(token, JWT_SECRET) as { userId: number };
   } catch {
