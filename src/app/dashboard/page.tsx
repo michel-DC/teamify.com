@@ -22,6 +22,11 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast, Toaster } from "sonner";
 
+export const metadata = {
+  title: "Teamify | Dashboard",
+  description: "Dashboard personnel sur l'applicatin Teamify",
+};
+
 export default function Page() {
   const router = useRouter();
   const { checkAuth, logout } = useAuth();
