@@ -18,7 +18,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import Image from "next/image";
 
 export function TeamSwitcher({
   teams,
@@ -61,12 +60,10 @@ export function TeamSwitcher({
             >
               <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                 {profileImage ? (
-                  <Image
+                  <img
                     src={profileImage}
                     alt={activeTeam.name}
                     className="size-4 rounded-full"
-                    width={16}
-                    height={16}
                   />
                 ) : (
                   <activeTeam.logo className="size-4" />

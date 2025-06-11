@@ -63,6 +63,15 @@ export default function StepWizard() {
     memberCount: 0,
     size: "",
     mission: "",
+    file: undefined as File | undefined,
+  } as {
+    name: string;
+    bio: string;
+    profileImage: string;
+    memberCount: number;
+    size: string;
+    mission: string;
+    file?: File;
   });
 
   const next = () => setStep((s) => s + 1);

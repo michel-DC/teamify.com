@@ -8,6 +8,7 @@ export interface StepProps {
     memberCount: number;
     size: string;
     mission: string;
+    file?: File;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
@@ -17,6 +18,7 @@ export interface StepProps {
       memberCount: number;
       size: string;
       mission: string;
+      file?: File;
     }>
   >;
 }

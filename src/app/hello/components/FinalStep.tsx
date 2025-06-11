@@ -9,13 +9,21 @@ export default function FinalStep({ formData }: StepProps) {
 
   const handleSubmit = async () => {
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("bio", formData.bio);
+      formDataToSend.append("memberCount", formData.memberCount.toString());
+      formDataToSend.append("size", formData.size);
+      formDataToSend.append("mission", formData.mission);
+
+      if (formData.file) {
+        formDataToSend.append("file", formData.file);
+      }
+
       const res = await fetch("/api/organization/create", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // important pour envoyer les cookies !
-        body: JSON.stringify(formData),
+        credentials: "include",
+        body: formDataToSend,
       });
 
       if (res.ok) {
@@ -29,6 +37,7 @@ export default function FinalStep({ formData }: StepProps) {
       alert("Erreur lors de la création de l'organisation.");
     }
   };
+
   return (
     <div className="space-y-4">
       <h2 className="text-xl font-semibold text-foreground">
