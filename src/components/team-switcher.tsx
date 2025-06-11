@@ -18,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import Image from "next/image";
 
 export function TeamSwitcher({
   teams,
@@ -29,6 +30,21 @@ export function TeamSwitcher({
 }) {
   const { isMobile } = useSidebar();
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+  const [profileImage, setProfileImage] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const response = await fetch("/api/organization/profile-image");
+        const data = await response.json();
+        setProfileImage(data.profileImage);
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+      }
+    };
+
+    fetchProfileImage();
+  }, []);
 
   if (!activeTeam) {
     return null;
@@ -44,7 +60,17 @@ export function TeamSwitcher({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeTeam.logo className="size-4" />
+                {profileImage ? (
+                  <Image
+                    src={profileImage}
+                    alt={activeTeam.name}
+                    className="size-4 rounded-full"
+                    width={16}
+                    height={16}
+                  />
+                ) : (
+                  <activeTeam.logo className="size-4" />
+                )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{activeTeam.name}</span>
@@ -68,7 +94,13 @@ export function TeamSwitcher({
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-md border">
-                  {typeof team.logo === "function" ? (
+                  {profileImage ? (
+                    <img
+                      src={profileImage}
+                      alt={team.name}
+                      className="h-6 w-6 rounded-full"
+                    />
+                  ) : typeof team.logo === "function" ? (
                     <team.logo className="h-6 w-6" />
                   ) : typeof team.logo === "string" ? (
                     <img
