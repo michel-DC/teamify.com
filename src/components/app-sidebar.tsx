@@ -59,20 +59,20 @@ const data = {
     },
     {
       title: "Événements",
-      url: "/events",
+      url: "dashboard/events",
       icon: Calendar,
       items: [
         {
           title: "Tous les événements",
-          url: "/events",
+          url: "dashboard/events",
         },
         {
           title: "Créer un événement",
-          url: "/events/new",
+          url: "dashboard/events/new",
         },
         {
           title: "Mes invitations",
-          url: "/events/invitations",
+          url: "dashboard/events/invitations",
         },
       ],
     },
@@ -83,15 +83,15 @@ const data = {
       items: [
         {
           title: "Mes organisations",
-          url: "/organizations",
+          url: "dashboard/organizations",
         },
         {
           title: "Créer une organisation",
-          url: "/organizations/new",
+          url: "dashboard/organizations/new",
         },
         {
           title: "Inviter un membre",
-          url: "/organizations/invite",
+          url: "dashboard/organizations/invite",
         },
       ],
     },
@@ -102,15 +102,15 @@ const data = {
       items: [
         {
           title: "Toutes les équipes",
-          url: "/teams",
+          url: "dashboard/teams",
         },
         {
           title: "Créer une équipe",
-          url: "/teams/new",
+          url: "dashboard/teams/new",
         },
         {
           title: "Gérer les membres",
-          url: "/teams/members",
+          url: "dashboard/teams/members",
         },
       ],
     },
@@ -121,11 +121,11 @@ const data = {
       items: [
         {
           title: "Discussions",
-          url: "/messages",
+          url: "dashboard/messages",
         },
         {
           title: "Nouveau message",
-          url: "/messages/new",
+          url: "dashboard/messages/new",
         },
       ],
     },
@@ -136,19 +136,19 @@ const data = {
       items: [
         {
           title: "Profil",
-          url: "/settings/profile",
+          url: "dashboard/settings/profile",
         },
         {
           title: "Notifications",
-          url: "/settings/notifications",
+          url: "dashboard/settings/notifications",
         },
         {
           title: "Sécurité",
-          url: "/settings/security",
+          url: "dashboard/settings/security",
         },
         {
           title: "Facturation",
-          url: "/settings/billing",
+          url: "dashboard/settings/billing",
         },
       ],
     },
