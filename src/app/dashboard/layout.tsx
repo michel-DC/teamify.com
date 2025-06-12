@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -13,20 +15,16 @@ export const metadata: Metadata = {
   description: "Dashboard utilisateur de gestion d'organisation",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="fr"
-      className={`${spaceGrotesk.variable} h-full bg-background text-foreground`}
-    >
-      <head>
-        <link rel="icon" href="/images/logo/favicon.png" type="image/x-icon" />
-      </head>
-      <body className={spaceGrotesk.className}>{children}</body>
-    </html>
+    <SidebarProvider>
+      <AppSidebar />
+      <main
+        className={`${spaceGrotesk.variable} h-full bg-background text-foreground`}
+      >
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 }
