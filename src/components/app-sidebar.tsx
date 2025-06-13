@@ -61,6 +61,7 @@ const data = {
       title: "Événements",
       url: "dashboard/events",
       icon: Calendar,
+      isActive: true,
       items: [
         {
           title: "Tous les événements",
@@ -80,6 +81,7 @@ const data = {
       title: "Organisations",
       url: "/organizations",
       icon: GalleryVerticalEnd,
+      isActive: true,
       items: [
         {
           title: "Mes organisations",
@@ -99,6 +101,7 @@ const data = {
       title: "Équipes",
       url: "/teams",
       icon: Users,
+      isActive: true,
       items: [
         {
           title: "Toutes les équipes",
@@ -118,6 +121,7 @@ const data = {
       title: "Messages",
       url: "/messages",
       icon: Command,
+      isActive: true,
       items: [
         {
           title: "Discussions",
@@ -133,6 +137,7 @@ const data = {
       title: "Paramètres",
       url: "/settings",
       icon: Settings2,
+      isActive: true,
       items: [
         {
           title: "Profil",
@@ -192,7 +197,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             },
             teams: [
               {
-                name: user.organization?.name,
+                name: user.organization?.name || "Mon Organisation",
                 profileImage: user.organization?.profileImage || "",
               },
             ],
@@ -209,13 +214,37 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     fetchData();
   }, []);
 
+  const [profileImage, setProfileImage] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const response = await fetch("/api/organization/profile-image");
+        const data = await response.json();
+        setProfileImage(data.profileImage);
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+      }
+    };
+
+    fetchProfileImage();
+  }, []);
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher
           teams={userData.teams.map((team) => ({
             name: team.name,
-            logo: () => <img src={team.profileImage} alt={team.name} />,
+            logo: profileImage
+              ? () => (
+                  <img
+                    src={profileImage}
+                    alt={team.name}
+                    className="size-4 rounded-full"
+                  />
+                )
+              : GalleryVerticalEnd,
           }))}
         />
       </SidebarHeader>

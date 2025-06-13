@@ -14,6 +14,23 @@ export async function POST(req: Request) {
   }
 
   const formData = await req.formData();
+
+  // Debug logs
+  console.log("FormData received:", {
+    title: formData.get("title"),
+    description: formData.get("description"),
+    date: formData.get("date"),
+    location: formData.get("location"),
+    capacity: formData.get("capacity"),
+    status: formData.get("status"),
+    budget: formData.get("budget"),
+    category: formData.get("category"),
+    isPublic: formData.get("isPublic"),
+    isCancelled: formData.get("isCancelled"),
+    orgId: formData.get("orgId"),
+    hasFile: !!formData.get("file"),
+  });
+
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const date = new Date(formData.get("date") as string);
@@ -27,22 +44,42 @@ export async function POST(req: Request) {
   const isPublic = formData.get("isPublic") === "true";
   const isCancelled = formData.get("isCancelled") === "false";
   const file = formData.get("file") as File;
-  const orgId = formData.get("orgId") as string;
+  const orgId = parseInt(formData.get("orgId") as string);
 
-  if (
-    !title ||
-    !description ||
-    !date ||
-    !location ||
-    !capacity ||
-    !status ||
-    !budget ||
-    !category ||
-    !isPublic ||
-    !isCancelled ||
-    !orgId
-  ) {
-    return NextResponse.json({ error: "Champs manquants" }, { status: 400 });
+  // Debug logs for parsed values
+  console.log("Parsed values:", {
+    title,
+    description,
+    date,
+    location,
+    capacity,
+    status,
+    budget,
+    category,
+    isPublic,
+    isCancelled,
+    orgId,
+    hasFile: !!file,
+  });
+
+  // Validation checks
+  const missingFields = [];
+  if (!title) missingFields.push("title");
+  if (!description) missingFields.push("description");
+  if (!date) missingFields.push("date");
+  if (!location) missingFields.push("location");
+  if (!capacity) missingFields.push("capacity");
+  if (!status) missingFields.push("status");
+  if (!budget) missingFields.push("budget");
+  if (!category) missingFields.push("category");
+  if (!orgId || isNaN(orgId)) missingFields.push("orgId");
+
+  if (missingFields.length > 0) {
+    console.log("Missing fields:", missingFields);
+    return NextResponse.json(
+      { error: "Champs manquants", missingFields },
+      { status: 400 }
+    );
   }
 
   try {
@@ -77,7 +114,7 @@ export async function POST(req: Request) {
         category,
         isPublic,
         isCancelled,
-        organization: { connect: { id: Number(orgId) } },
+        organization: { connect: { id: orgId } },
       },
     });
 
@@ -90,6 +127,12 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     console.error("[EVENT_CREATE_ERROR]", error);
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "Erreur serveur",
+        details: error instanceof Error ? error.message : String(error),
+      },
+      { status: 500 }
+    );
   }
 }

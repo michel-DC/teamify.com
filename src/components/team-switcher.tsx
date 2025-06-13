@@ -45,6 +45,12 @@ export function TeamSwitcher({
     fetchProfileImage();
   }, []);
 
+  React.useEffect(() => {
+    if (teams && teams.length > 0) {
+      setActiveTeam(teams[0]);
+    }
+  }, [teams]);
+
   if (!activeTeam) {
     return null;
   }

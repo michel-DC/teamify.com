@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+} from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
 const spaceGrotesk = Space_Grotesk({
@@ -19,12 +23,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main
+      <SidebarInset
         className={`${spaceGrotesk.variable} h-full bg-background text-foreground`}
       >
         <SidebarTrigger />
         {children}
-      </main>
+      </SidebarInset>
     </SidebarProvider>
   );
 }
