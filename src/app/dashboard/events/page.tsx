@@ -1,6 +1,6 @@
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { ChartAreaInteractive } from "@/components/dashboard/events/chart-area-interactive";
 import { SectionCards } from "@/components/dashboard/events/section-card-event";
-import { SiteHeader } from "@/components/site-header";
+import { SiteHeader } from "@/components/dashboard/events/site-header";
 
 export default function EventOverview() {
   return (
