@@ -128,194 +128,204 @@ export function SectionCards() {
   }, []);
 
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Nombre d'évènements</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {eventCount !== null ? eventCount : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Vos évènements <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Nombre total d'évènements au nom de cette organisation
-          </div>
-        </CardFooter>
-      </Card>
+    <div>
+      <div className="flex items-center justify-center text-foreground mb-4">
+        <h1 className="text-3xl font-semibold">Vos statistiques</h1>
+      </div>
+      <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Nombre d'évènements</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {eventCount !== null ? eventCount : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Vos évènements <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Nombre total d'évènements au nom de cette organisation
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Budget total</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {totalBudget !== null
-              ? `${totalBudget.toFixed(2)} €`
-              : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Aperçu du budget <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Budget total investi pour tous vos événements
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Budget total</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {totalBudget !== null
+                ? `${totalBudget.toFixed(2)} €`
+                : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Aperçu du budget <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Budget total investi pour tous vos événements
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Catégorie la plus populaire</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {mostCreatedCategory !== null ? mostCreatedCategory : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            L'utilisation de cette catégorie{" "}
-            <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            La catégorie la plus utilisée pour les évènements de cette
-            organisation
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Catégorie la plus populaire</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {mostCreatedCategory !== null
+                ? mostCreatedCategory
+                : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              L'utilisation de cette catégorie{" "}
+              <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              La catégorie la plus utilisée pour les évènements de cette
+              organisation
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Ville la plus populaire</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {mostPresentCity !== null ? mostPresentCity : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Ville la plus populaire <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            La ville où se déroulent le plus d'évènements de cette organisation
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Ville la plus populaire</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {mostPresentCity !== null ? mostPresentCity : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Ville la plus populaire <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              La ville où se déroulent le plus d'évènements de cette
+              organisation
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Dernier évènement</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {lastEventDate !== null ? lastEventDate : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Date de création <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Date de création du dernier évènement
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Dernier évènement</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {lastEventDate !== null ? lastEventDate : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Date de création <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Date de création du dernier évènement
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Nombre d'évènement public</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {publicEventCount !== null ? publicEventCount : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Évènements publics <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Nombre d'évènements visibles par tous
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Nombre d'évènement public</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {publicEventCount !== null ? publicEventCount : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Évènements publics <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Nombre d'évènements visibles par tous
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Nombre d'événements terminés</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {finishEventCount !== null ? finishEventCount : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Évènements terminés <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Nombre total d'évènements terminés
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Nombre d'événements terminés</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {finishEventCount !== null ? finishEventCount : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Évènements terminés <IconTrendingUp className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Nombre total d'évènements terminés
+            </div>
+          </CardFooter>
+        </Card>
 
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Nombre d'évènements annulé</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {cancelledEventCount !== null ? cancelledEventCount : "Loading..."}
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              Loading...
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Évènements annulé <IconTrendingDown className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Nombre total d'évènements annulés
-          </div>
-        </CardFooter>
-      </Card>
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Nombre d'évènements annulé</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {cancelledEventCount !== null
+                ? cancelledEventCount
+                : "Loading..."}
+            </CardTitle>
+            <CardAction>
+              <Badge variant="outline">
+                <IconTrendingUp />
+                Loading...
+              </Badge>
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm">
+            <div className="line-clamp-1 flex gap-2 font-medium">
+              Évènements annulé <IconTrendingDown className="size-4" />
+            </div>
+            <div className="text-muted-foreground">
+              Nombre total d'évènements annulés
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 }

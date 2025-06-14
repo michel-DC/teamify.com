@@ -1,6 +1,7 @@
-import { ChartAreaInteractive } from "@/components/dashboard/events/chart-area-interactive";
+import CalendarOverview from "@/components/dashboard/events/calendar-overview";
 import { SectionCards } from "@/components/dashboard/events/section-card-event";
 import { SiteHeader } from "@/components/dashboard/events/site-header";
+import { Separator } from "@/components/ui/separator";
 
 export default function EventOverview() {
   return (
@@ -10,7 +11,11 @@ export default function EventOverview() {
         <div className="@container/main flex flex-1 flex-col gap-2">
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
             <SectionCards />
-            <div className="px-4 lg:px-6">{/* <ChartAreaInteractive /> */}</div>
+            <Separator className="my-6" />
+            <div className="px-4 lg:px-6">
+              <CalendarOverview />
+            </div>
+            <Separator className="my-6" />
           </div>
         </div>
       </div>
