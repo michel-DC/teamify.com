@@ -26,6 +26,9 @@ export function SectionCards() {
   const [cancelledEventCount, setCancelledEventCount] = React.useState<
     number | null
   >(null);
+  const [finishEventCount, setFinishEventCount] = React.useState<number | null>(
+    null
+  );
   const [mostPresentCity, setMostPresentCity] = React.useState<string | null>(
     null
   );
@@ -103,6 +106,12 @@ export function SectionCards() {
             (event: { isPublic: boolean }) => event.isPublic === true
           ).length;
           setPublicEventCount(publicEventCount);
+
+          // calcul du nombre d'évènements terminés
+          const finishEventCount = data.events.filter(
+            (event: { status: string }) => event.status === "TERMINE"
+          ).length;
+          setFinishEventCount(finishEventCount);
 
           // calcul du nombre d'évènements annulé
           const cancelledEventCount = data.events.filter(
@@ -234,7 +243,7 @@ export function SectionCards() {
             Date de création <IconTrendingUp className="size-4" />
           </div>
           <div className="text-muted-foreground">
-            Date de la dernière création d'évènement
+            Date de création du dernier évènement
           </div>
         </CardFooter>
       </Card>
@@ -264,7 +273,30 @@ export function SectionCards() {
 
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Nombre d'évènement annulé</CardDescription>
+          <CardDescription>Nombre d'événements terminés</CardDescription>
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+            {finishEventCount !== null ? finishEventCount : "Loading..."}
+          </CardTitle>
+          <CardAction>
+            <Badge variant="outline">
+              <IconTrendingUp />
+              Loading...
+            </Badge>
+          </CardAction>
+        </CardHeader>
+        <CardFooter className="flex-col items-start gap-1.5 text-sm">
+          <div className="line-clamp-1 flex gap-2 font-medium">
+            Évènements terminés <IconTrendingUp className="size-4" />
+          </div>
+          <div className="text-muted-foreground">
+            Nombre total d'évènements terminés
+          </div>
+        </CardFooter>
+      </Card>
+
+      <Card className="@container/card">
+        <CardHeader>
+          <CardDescription>Nombre d'évènements annulé</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
             {cancelledEventCount !== null ? cancelledEventCount : "Loading..."}
           </CardTitle>

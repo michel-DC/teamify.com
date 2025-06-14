@@ -6,7 +6,6 @@ import { join } from "path";
 import { EventCategory, EventStatus } from "@prisma/client";
 
 export async function POST(req: Request) {
-  // 🔒 Récupère l'utilisateur authentifié depuis le cookie
   const user = await getCurrentUser();
 
   if (!user) {
@@ -15,7 +14,6 @@ export async function POST(req: Request) {
 
   const formData = await req.formData();
 
-  // Debug
   console.log("FormData received:", {
     title: formData.get("title"),
     description: formData.get("description"),
@@ -44,7 +42,6 @@ export async function POST(req: Request) {
     : null;
   const category = formData.get("category") as EventCategory;
   const isPublic = formData.get("isPublic") === "true";
-  const isCancelled = formData.get("isCancelled") === "false";
   const file = formData.get("file") as File;
   const orgId = parseInt(formData.get("orgId") as string);
 
@@ -59,7 +56,7 @@ export async function POST(req: Request) {
     budget,
     category,
     isPublic,
-    isCancelled,
+    isCancelled: false,
     orgId,
     hasFile: !!file,
   });
@@ -119,7 +116,7 @@ export async function POST(req: Request) {
         budget,
         category,
         isPublic,
-        isCancelled,
+        isCancelled: false,
         organization: { connect: { id: orgId } },
       },
     });

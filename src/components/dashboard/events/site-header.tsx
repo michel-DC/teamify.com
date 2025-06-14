@@ -8,12 +8,12 @@ export function SiteHeader() {
       <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
         <h1 className="text-base font-medium">Vos statistiques</h1>
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
+          <Button asChild size="sm" className="hidden sm:flex mb-3">
             <a
               href="/dashboard/events/new"
               rel="noopener noreferrer"
               target="_blank"
-              className="dark:text-foreground"
+              className="dark:text-background"
             >
               Créer un nouvel évènement
             </a>
