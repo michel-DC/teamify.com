@@ -15,11 +15,12 @@ export async function POST(req: Request) {
 
   const formData = await req.formData();
 
-  // Debug logs
+  // Debug
   console.log("FormData received:", {
     title: formData.get("title"),
     description: formData.get("description"),
-    date: formData.get("date"),
+    startDate: formData.get("startDate"),
+    endDate: formData.get("endDate"),
     location: formData.get("location"),
     capacity: formData.get("capacity"),
     status: formData.get("status"),
@@ -33,7 +34,8 @@ export async function POST(req: Request) {
 
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
-  const date = new Date(formData.get("date") as string);
+  const startDate = new Date(formData.get("startDate") as string);
+  const endDate = new Date(formData.get("endDate") as string);
   const location = formData.get("location") as string;
   const capacity = formData.get("capacity") as string;
   const status = formData.get("status") as EventStatus;
@@ -46,11 +48,11 @@ export async function POST(req: Request) {
   const file = formData.get("file") as File;
   const orgId = parseInt(formData.get("orgId") as string);
 
-  // Debug logs for parsed values
   console.log("Parsed values:", {
     title,
     description,
-    date,
+    startDate,
+    endDate,
     location,
     capacity,
     status,
@@ -62,28 +64,10 @@ export async function POST(req: Request) {
     hasFile: !!file,
   });
 
-  // Validation checks
-  const missingFields = [];
-  if (!title) missingFields.push("title");
-  if (!description) missingFields.push("description");
-  if (!date) missingFields.push("date");
-  if (!location) missingFields.push("location");
-  if (!capacity) missingFields.push("capacity");
-  if (!status) missingFields.push("status");
-  if (!budget) missingFields.push("budget");
-  if (!category) missingFields.push("category");
-  if (!orgId || isNaN(orgId)) missingFields.push("orgId");
-
-  if (missingFields.length > 0) {
-    console.log("Missing fields:", missingFields);
-    return NextResponse.json(
-      { error: "Champs manquants", missingFields },
-      { status: 400 }
-    );
-  }
-
   try {
-    let imageUrl = null;
+    let imageUrl: string | null = null;
+
+    const file = formData.get("file") as File;
 
     if (file) {
       const bytes = await file.arrayBuffer();
@@ -100,12 +84,34 @@ export async function POST(req: Request) {
       imageUrl = `/uploads/organizations/events/${fileName}`;
     }
 
+    const missingFields = [];
+    if (!title) missingFields.push("title");
+    if (!description) missingFields.push("description");
+    if (!startDate) missingFields.push("startDate");
+    if (!endDate) missingFields.push("endDate");
+    if (!location) missingFields.push("location");
+    if (!imageUrl) missingFields.push("imageUrl");
+    if (!capacity) missingFields.push("capacity");
+    if (!status) missingFields.push("status");
+    if (!budget) missingFields.push("budget");
+    if (!category) missingFields.push("category");
+    if (!orgId || isNaN(orgId)) missingFields.push("orgId");
+
+    if (missingFields.length > 0) {
+      console.log("Missing fields:", missingFields);
+      return NextResponse.json(
+        { error: "Champs manquants", missingFields },
+        { status: 400 }
+      );
+    }
+
     const event = await prisma.event.create({
       data: {
         owner: { connect: { id: user.id } },
         title,
         description,
-        date,
+        startDate,
+        endDate,
         location,
         imageUrl,
         capacity: Number(capacity),
