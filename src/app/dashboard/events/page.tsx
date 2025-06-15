@@ -1,3 +1,5 @@
+import CalendarOverview from "@/components/dashboard/events/calendar-overview";
+import { EventEvolutionChart } from "@/components/dashboard/events/event-evolution-chart";
 import { EventsTableWrapper } from "@/components/dashboard/events/events-table-wrapper";
 import { SectionCards } from "@/components/dashboard/events/section-card-event";
 import { SiteHeader } from "@/components/dashboard/events/site-header";
@@ -14,9 +16,16 @@ export default function EventOverview() {
             <Separator className="my-6" />
             <div className="px-4 lg:px-6"></div>
             <div className="px-12">
+              <EventEvolutionChart />
+            </div>
+            <Separator className="my-6" />
+            <div className="px-12">
               <EventsTableWrapper />
             </div>
-            {/* <Separator className="my-6" /> */}
+            <Separator className="my-6" />
+            <div className="px-12">
+              <CalendarOverview />
+            </div>
           </div>
         </div>
       </div>
