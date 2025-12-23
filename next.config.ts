@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    turbopack: {
+      root: "./",
+    },
+  },
+
   images: {
     remotePatterns: [
       {
@@ -29,14 +35,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   compress: true,
   poweredByHeader: false,
   output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   env: {
     DATABASE_URL: process.env.DATABASE_URL,

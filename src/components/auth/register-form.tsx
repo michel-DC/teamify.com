@@ -127,7 +127,7 @@ export const RegisterForm = () => {
         fill="white"
       />
 
-      <div className="relative z-10 w-2/4 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full sm:w-3/4 lg:w-2/4 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full">
           <div className="flex justify-center">
             <Link href="/">
@@ -142,7 +142,7 @@ export const RegisterForm = () => {
             </Link>
           </div>
 
-          <div className="mt-6 sm:mt-8 bg-card/80 backdrop-blur-sm border border-border/60 rounded-2xl shadow-xl p-6 sm:p-8">
+          <div className="mt-6 sm:mt-8 bg-card/80 backdrop-blur-sm border border-border/60 rounded-2xl shadow-xl p-4 sm:p-6 md:p-8">
             <div className="flex items-center justify-between">
               <Button
                 type="button"
